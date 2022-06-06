@@ -10,9 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      NEXT_PUBLIC_BASE_PATH: /stock_analyzer
-
 
     strategy:
       matrix:
