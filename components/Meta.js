@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import prefix from '../prefix'
 
 const prefix = '/stock_analyzer'
 
