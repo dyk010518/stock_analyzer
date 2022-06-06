@@ -1,10 +1,8 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/about": "pages/about.js",
-  "/api/articles": "pages/api/articles.js",
-  "/api/articles/[id]": "pages/api/articles/[id].js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/article/[id]": "pages/article/[id].js"
+  "/api/articles": "pages/api/articles.js",
+  "/article/[id]": "pages/article/[id].js",
+  "/": "pages/index.js"
 }
