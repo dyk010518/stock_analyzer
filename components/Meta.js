@@ -1,8 +1,6 @@
 import Head from 'next/head'
 import prefix from '../prefix'
 
-const prefix = '/stock_analyzer'
-
 const Meta = ({title, keywords, description}) => {
     return (
         <Head>
