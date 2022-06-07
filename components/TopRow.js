@@ -11,16 +11,16 @@ const TopRow = () => {
             </tr>
             <tr className={topStyles.row}>
                 <th className={topStyles.col}></th>
-                <th className={topStyles.col}>
+                {/* <th className={topStyles.col}>
                     <td>1 year</td>
                     <td>3 year</td>
                     <td>5 year</td>
                     <td>10 year</td>
-                </th>
+                </th> */}
                 <th className={topStyles.col}>
-                    <td>Low</td>
-                    <td>Mid</td>
-                    <td>High</td>
+                    <p>Low</p>
+                    <p>Low</p>
+                    <p>Low</p>
                 </th>
             </tr>
         </thead>
