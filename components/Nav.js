@@ -6,10 +6,10 @@ const Nav = () => {
         <nav className={navStyles.nav}>
             <ul>
                 <li>
-                    <Link href='/'>Home</Link>
+                    <Link href='/'>Stock Analyzer</Link>
                 </li>
                 <li>
-                    <Link href='/about'>About</Link>
+                    <Link href='/guide'>Guide</Link>
                 </li>
             </ul>
         </nav>
