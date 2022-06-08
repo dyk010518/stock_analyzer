@@ -8,7 +8,7 @@ export default function Home({articles}) {
   return (
     <div>
       <StockAnalysis />
-      <ArticleList articles={articles}/>
+      {/* <ArticleList articles={articles}/> */}
     </div>
     
   )

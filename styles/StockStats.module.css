@@ -1,0 +1,20 @@
+.row {
+    background-color: #fcf6e5ff;
+    color: #7f6000;
+    padding: 0%;
+}
+
+.col {
+    width: 33.33%;
+    padding: 0%;
+}
+
+.col p2, .col div {
+    font-size: 12pt;
+    display: inline-block;
+    width: 33.33%
+}
+
+.col input {
+    width: 60%;
+}
