@@ -2,6 +2,7 @@ import {server} from "../../../config"
 import Link from 'next/link'
 import { useRouter } from "next/router"
 import Meta from '../../../components/Meta'
+import StockAnalysis from "../../../components/StockAnalysis"
 
 const article = ({stock}) => {
     // const router = useRouter()
@@ -11,6 +12,7 @@ const article = ({stock}) => {
         <Meta />
         <h1>{stock.symbol}</h1>
         <br />
+        <StockAnalysis />
         <Link href='/'>Go Back</Link>
     </>
 }
