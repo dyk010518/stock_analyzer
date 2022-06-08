@@ -1,13 +1,17 @@
 .row {
     background-color: #d5a82aff;
     color: white;
+    padding: 0%;
 }
 
-/* .col {
-    width: 33%;
+.col {
+    width: 33.33%;
+    padding: 0%;
 }
 
-.col td {
-    display: flex;
+.col p2 {
+    font-size: 12pt;
+    display: inline-block;
+    width: 33.33%
 }
-   */
+  
