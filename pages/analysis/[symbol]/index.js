@@ -2,7 +2,7 @@ import {server} from "../../../config"
 import Link from 'next/link'
 import { useRouter } from "next/router"
 import Meta from '../../../components/Meta'
-import StockAnalysis from "../../../components/StockAnalysis"
+import StockAnalyzer from "../../../components/StockAnalyzer"
 
 const article = ({stock}) => {
     // const router = useRouter()
@@ -12,14 +12,15 @@ const article = ({stock}) => {
         <Meta />
         <h1>{stock.symbol}</h1>
         <br />
-        <StockAnalysis />
+        <StockAnalyzer />
         <Link href='/'>Go Back</Link>
     </>
 }
 
 export const getServerSideProps = async (context) => {
-    const res = await fetch(`https://finnhub.io/api/v1/stock/financials-reported?symbol=${context.params.symbol}&freq=quarterly&token=caf8e0iad3ibf4h8u1u0`)
+    const res = await fetch(`https://finnhub.io/api/v1/stock/financials-reported?symbol=${context.params.symbol}&freq=quarterly&token=${process.env.FINNHUB_TOKEN}`)
     const stock = await res.json()
+
 
     return {
         props: {

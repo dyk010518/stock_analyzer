@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+}
+
+.button {
+    background-color: #d5a82aff;
+    color: white;
+    font-size: 16pt;
+    height: 48px;
+    width: 160px;
+    border-width: 0px;
+}
+
+.button:hover {
+    background-color: #c1920eff;
+}
