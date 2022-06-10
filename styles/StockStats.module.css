@@ -12,9 +12,12 @@
 .col p2, .col div {
     font-size: 12pt;
     display: inline-block;
-    width: 33.33%
+    width: 33.33%;
 }
 
+
+
 .col input {
-    width: 60%;
+    width: 50%;
+    text-align: center;
 }
