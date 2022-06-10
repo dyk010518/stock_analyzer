@@ -1,11 +1,11 @@
-import stockStatsStyles from '../styles/StockStats.module.css'
+import stockStatsStyles from '../../styles/StockStats.module.css'
 
-const Revenue = () => {
+const AnnualReturn = () => {
     return (
         <thead>
             <tr className={stockStatsStyles.row}>
                 <th className={stockStatsStyles.col}>
-                    <p1>Annual Revenue Growth (%)</p1>
+                    <p1>Annual Return (%)</p1>
                 </th>
                 <th className={stockStatsStyles.col}>
                     <p2>1 year</p2>
@@ -22,4 +22,4 @@ const Revenue = () => {
     )
 }
 
-export default Revenue
+export default AnnualReturn
