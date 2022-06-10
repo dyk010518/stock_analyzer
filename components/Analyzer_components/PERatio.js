@@ -1,11 +1,11 @@
-import stockStatsStyles from '../styles/StockStats.module.css'
+import stockStatsStyles from '../../styles/StockStats.module.css'
 
-const ProfitMargin = () => {
+const PERatio = () => {
     return (
         <thead>
             <tr className={stockStatsStyles.row}>
                 <th className={stockStatsStyles.col}>
-                    <p1>Profit Margin (%)</p1>
+                    <p1>Terminal P/E</p1>
                 </th>
                 <th className={stockStatsStyles.col}>
                     <p2>1 year</p2>
@@ -22,4 +22,4 @@ const ProfitMargin = () => {
     )
 }
 
-export default ProfitMargin
+export default PERatio

@@ -1,11 +1,11 @@
-import stockStatsStyles from '../styles/StockStats.module.css'
+import stockStatsStyles from '../../styles/StockStats.module.css'
 
-const PFCFRatio = () => {
+const Revenue = () => {
     return (
         <thead>
             <tr className={stockStatsStyles.row}>
                 <th className={stockStatsStyles.col}>
-                    <p1>Terminal P/FCF</p1>
+                    <p1>Annual Revenue Growth (%)</p1>
                 </th>
                 <th className={stockStatsStyles.col}>
                     <p2>1 year</p2>
@@ -22,4 +22,4 @@ const PFCFRatio = () => {
     )
 }
 
-export default PFCFRatio
+export default Revenue

@@ -1,11 +1,11 @@
-import stockStatsStyles from '../styles/StockStats.module.css'
+import stockStatsStyles from '../../styles/StockStats.module.css'
 
-const FCFMargin = () => {
+const ProfitMargin = () => {
     return (
         <thead>
             <tr className={stockStatsStyles.row}>
                 <th className={stockStatsStyles.col}>
-                    <p1>Free Cash Flow Margin (%)</p1>
+                    <p1>Profit Margin (%)</p1>
                 </th>
                 <th className={stockStatsStyles.col}>
                     <p2>1 year</p2>
@@ -22,4 +22,4 @@ const FCFMargin = () => {
     )
 }
 
-export default FCFMargin
+export default ProfitMargin

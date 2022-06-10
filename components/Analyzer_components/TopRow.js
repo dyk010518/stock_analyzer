@@ -1,4 +1,4 @@
-import topStyles from '../styles/TopRow.module.css'
+import topStyles from '../../styles/TopRow.module.css'
 
 
 const TopRow = () => {

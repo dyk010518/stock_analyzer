@@ -1,11 +1,11 @@
-import stockStatsStyles from '../styles/StockStats.module.css'
+import stockStatsStyles from '../../styles/StockStats.module.css'
 
-const PERatio = () => {
+const FCFMargin = () => {
     return (
         <thead>
             <tr className={stockStatsStyles.row}>
                 <th className={stockStatsStyles.col}>
-                    <p1>Terminal P/E</p1>
+                    <p1>Free Cash Flow Margin (%)</p1>
                 </th>
                 <th className={stockStatsStyles.col}>
                     <p2>1 year</p2>
@@ -22,4 +22,4 @@ const PERatio = () => {
     )
 }
 
-export default PERatio
+export default FCFMargin
