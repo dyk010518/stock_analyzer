@@ -10,18 +10,28 @@ import AnnualReturn from './Analyzer_components/AnnualReturn'
 
 
 
-const StockAnalyzer = () => {
+const StockAnalyzer = ({reports}) => {
     return (
         <table className={stockStyles.table}>
             <TopRow />
-            <Revenue />
-            <ProfitMargin />
-            <FCFMargin />
-            <PERatio />
-            <PFCFRatio />
-            <AnnualReturn />
+            <Revenue reports={reports} />
+            <ProfitMargin reports={reports}/>
+            <FCFMargin reports={reports}/>
+            <PERatio reports={reports}/>
+            <PFCFRatio reports={reports}/>
+            <AnnualReturn reports={reports}/>
         </table>
     )
 }
 
-export default StockAnalyzer
+const getAverage = (input_array) => {
+    let sum = 0
+    let irrelevant = 0
+    for(var i = 0; i < input_array.length; i++){
+        if(typeof input_array[i] == "number") sum += input_array[i]
+        if(typeof input_array[i] != "number") irrelevant ++
+    }
+    return input_array.length != irrelevant ? sum/(input_array.length-irrelevant) : undefined
+}
+
+export {StockAnalyzer, getAverage}
