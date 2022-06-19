@@ -11,11 +11,9 @@ const testvar = true
 export default function Home({articles}) {
   return (
     <div>
-      {/* {testvar ? (<SymbolSearch/>) : (<></>)} */}
-      <SymbolSearch />
-      <StockAnalyzer />
-      <AnalyzeResult pressed={testvar} />
-      {/* <ArticleList articles={articles}/> */}
+      {/* <SymbolSearch /> */}
+      {/* <StockAnalyzer />
+      <AnalyzeResult pressed={testvar} /> */}
     </div>
     
   )
