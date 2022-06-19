@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
   assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH,
+  alphaAPI: process.env.ALPHA_API_KEY,
 }
 
 module.exports = nextConfig

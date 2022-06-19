@@ -5,7 +5,7 @@ const PFCFRatio = () => {
         <thead>
             <tr className={stockStatsStyles.row}>
                 <th className={stockStatsStyles.col}>
-                    <p1>Terminal P/FCF</p1>
+                    <p1>P/FCF Ratio</p1>
                 </th>
                 <th className={stockStatsStyles.col}>
                     <p2>1 year</p2>

@@ -1,4 +1,5 @@
 import headerStyles from '../styles/Header.module.css'
+import SymbolSearch from './SymbolSearch'
 
 const Header = () => {
     return (
@@ -7,6 +8,8 @@ const Header = () => {
                 <span>Stock</span> Analyzer
             </h1>
             <p className={headerStyles.description}>Stock Analyzer Tool</p>
+
+            <SymbolSearch />
         </div>
     )
 }
