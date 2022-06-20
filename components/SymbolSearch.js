@@ -6,7 +6,7 @@ const SymbolSearch = () => {
     const router = useRouter()
 
     const handleClick = (input) => {
-        input && router.push(`/analysis/${input.value.toUpperCase()}`)
+        input.value && router.push(`/analysis/${input.value.toUpperCase()}`)
     }
 
     return (
