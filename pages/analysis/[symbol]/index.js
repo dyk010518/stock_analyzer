@@ -17,12 +17,12 @@ const article = ({income_statement, balance_sheet, cash_flow, daily_adjusted}) =
 
     return <>
         <Meta />
-        {found && (<h1>{reports.IS.symbol}</h1>)}
+        {found && <h1>{reports.IS.symbol}</h1>}
         <br />
-        <h>{found}</h>
-        <StockAnalyzer reports={reports}/>
-        <AnalyzeResult pressed={false} />
-        <Link href='/'>Search up a new stock</Link>
+        {found && <StockAnalyzer reports={reports}/>}
+        {found && <AnalyzeResult pressed={false} />}
+        {!found && <h2>We couldn't find the symbol you typed. Please try again with a different symbol</h2>}
+        <Link href='/'>Go Back Home</Link>
         
     </>
 }
