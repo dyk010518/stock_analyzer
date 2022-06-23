@@ -4,22 +4,27 @@ import { useRouter } from "next/router"
 import Meta from '../../../components/Meta'
 import { StockAnalyzer } from "../../../components/StockAnalyzer"
 import AnalyzeResult from '../../../components/AnalyzeResult'
+import StockTitle from "../../../components/StockTitle"
 
 
-const article = ({income_statement, balance_sheet, cash_flow, daily_adjusted, stock_info}) => {
+const article = ({income_statement, balance_sheet, cash_flow, daily_adjusted, stock_info, price_info,}) => {
+    const info = {
+        SI: stock_info,
+        PI: price_info,
+    }
+
     const reports = {
         IS: income_statement,
         BS: balance_sheet,
         CF: cash_flow,
         DA: daily_adjusted,
-        SI: stock_info,
     }
+
     const found = income_statement.symbol ? true : false  
 
     return <>
         <Meta />
-        {found && <h1>{reports.SI.Name}</h1>}
-        {found && <h1>{reports.IS.symbol}</h1>}
+        {found && <StockTitle info={info}/>}
         <br />
         {found && <StockAnalyzer reports={reports}/>}
         {found && <AnalyzeResult pressed={false} />}
@@ -39,11 +44,14 @@ export const getServerSideProps = async (context) => {
     const res3 = await fetch(`https://www.alphavantage.co/query?function=CASH_FLOW&symbol=${context.params.symbol}&apikey=${process.env.ALPHA_API_KEY}`)
     const cash_flow = await res3.json()
 
-    const res4 = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${context.params.symbol}&outputsize=full&apikey=${process.env.ALPHA_API_KEY}`)
+    const res4 = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${context.params.symbol}&apikey=${process.env.ALPHA_API_KEY}`)
     const daily_adjusted = await res4.json() 
 
     const res5 = await fetch(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=${context.params.symbol}&apikey=${process.env.ALPHA_API_KEY}`)
     const stock_info = await res5.json()
+
+    const res6 = await fetch(`https://finnhub.io/api/v1/quote?symbol=${context.params.symbol}&token=${process.env.FINNHUB_TOKEN}`)
+    const price_info = await res6.json()
 
     return {
         props: {
@@ -52,6 +60,7 @@ export const getServerSideProps = async (context) => {
             cash_flow,
             daily_adjusted,
             stock_info,
+            price_info,
         }
     }
 }
