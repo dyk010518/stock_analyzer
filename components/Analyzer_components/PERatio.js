@@ -2,7 +2,7 @@ import stockStatsStyles from '../../styles/StockStats.module.css'
 import { getAverage } from '../StockAnalyzer'
 
 const PERatio = ({reports}) => {
-    const PERatio = getPERatio(reports.IS, reports.BS, reports.DA)
+    const PERatio = getPERatio(reports.IS, reports.BS, reports.PI)
 
     return (
         <thead>
@@ -25,14 +25,13 @@ const PERatio = ({reports}) => {
     )
 }
 
-const getPERatio = (IS, BS, DA) => {
+const getPERatio = (IS, BS, PI) => {
     const number_of_quarters = IS.quarterlyReports.length
     if(number_of_quarters == 0) return "NA"
 
     const earning = getAnnualEarning(IS)
     const shares = BS.quarterlyReports[0].commonStockSharesOutstanding != "None" ? Number(BS.quarterlyReports[0].commonStockSharesOutstanding) : undefined
-    const sharePrice = Number(DA["Time Series (Daily)"][Object.keys(DA["Time Series (Daily)"])[0]]["5. adjusted close"])
-
+    const sharePrice = Number(PI["c"])
     return earning != 0 && shares ? (sharePrice*shares/earning).toFixed(2) : "NA"
 }
 
