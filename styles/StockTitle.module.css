@@ -5,3 +5,19 @@
 .negative {
     color: red;
 }
+
+.main_container {
+    display: flex;
+    justify-content: space-between;
+    width: 40vw;
+    margin-bottom: 5vh;
+}
+
+.left_container {
+    justify-content: left;
+}
+
+.right_container {
+    justify-content: right;
+
+}
