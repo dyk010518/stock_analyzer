@@ -1,7 +1,7 @@
 import stockStatsStyles from '../../styles/StockStats.module.css'
 
 const PFCFRatio = ({reports}) => {
-    const FCFRatio = getFCFRatio(reports.CF, reports.BS, reports.DA)
+    const FCFRatio = getFCFRatio(reports.CF, reports.BS, reports.PI)
 
     return (
         <thead>
@@ -24,13 +24,13 @@ const PFCFRatio = ({reports}) => {
     )
 }
 
-const getFCFRatio = (CF, BS, DA) => {
+const getFCFRatio = (CF, BS, PI) => {
     const number_of_quarters = CF.quarterlyReports.length
     if(number_of_quarters == 0) return "NA"
 
     const cash_flow = getAnnualCF(CF)
     const shares = BS.quarterlyReports[0].commonStockSharesOutstanding != "None" ? Number(BS.quarterlyReports[0].commonStockSharesOutstanding) : undefined
-    const sharePrice = Number(DA["Time Series (Daily)"][Object.keys(DA["Time Series (Daily)"])[0]]["5. adjusted close"])
+    const sharePrice =  Number(PI["c"])
 
     return cash_flow != 0 && shares ? (sharePrice*shares/cash_flow).toFixed(2) : "NA"
 }
