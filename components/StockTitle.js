@@ -10,13 +10,17 @@ const StockTitle = ({info}) => {
     const difference_percent = Number(info.PI["dp"]).toFixed(2)
 
     return (
-        <>
-            <h2>{name} ({symbol})</h2>
-            <div>{exchange} | Currency in {currency}</div>
-            <h3>{current_price}</h3>
-            {difference >= 0 && <div className={stockTitleStyle.positive}>{difference} ({difference_percent}%)</div>}
-            {difference < 0 && <div className={stockTitleStyle.negative}>{difference} ({difference_percent}%)</div>}
-        </>
+        <div className={stockTitleStyle.main_container}>
+            <div className={stockTitleStyle.left_container}>
+                <h2>{name} ({symbol})</h2>
+                <div>{exchange} | Currency in {currency}</div>
+            </div>
+            <div className={stockTitleStyle.right_container}>
+                <h2>{current_price}</h2>
+                {difference >= 0 && <div className={stockTitleStyle.positive}>{difference} ({difference_percent}%)</div>}
+                {difference < 0 && <div className={stockTitleStyle.negative}>{difference} ({difference_percent}%)</div>}
+            </div>
+        </div>
     )
 }
 
