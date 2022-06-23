@@ -6,9 +6,6 @@ const AnalyzeResult = ({pressed}) => {
             {pressed && (
                 <input type='text' placeholder='Search Stock Symbol'></input>
             )}
-            {/* {pressed ? (
-                <input type='text' placeholder='Search Stock Symbol'></input>
-            ) : (<></>)} */}
             <button className={resultStyles.button}>Analyze</button>
         </div>
     )
