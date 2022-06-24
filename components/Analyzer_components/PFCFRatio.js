@@ -1,7 +1,7 @@
 import stockStatsStyles from '../../styles/StockStats.module.css'
 
-const PFCFRatio = ({reports}) => {
-    const FCFRatio = getFCFRatio(reports.CF, reports.BS, reports.PI)
+const PFCFRatio = (props) => {
+    const FCFRatio = getFCFRatio(props.reports.CF, props.reports.BS, props.reports.PI)
 
     return (
         <thead>
@@ -15,9 +15,9 @@ const PFCFRatio = ({reports}) => {
                     <p2>-</p2>
                 </th>
                 <th className={stockStatsStyles.col}>
-                    <div><input type="number" id="quantity" name="quantity" min="1" max="5" /></div>
-                    <div><input type="number" id="quantity" name="quantity" min="1" max="5" /></div>
-                    <div><input type="number" id="quantity" name="quantity" min="1" max="5" /></div>
+                    <div><input type="number" id="PFCF_input_1" name="quantity" /></div>
+                    <div><input type="number" id="PFCF_input_2" name="quantity" /></div>
+                    <div><input type="number" id="PFCF_input_4" name="quantity" /></div>
                 </th>
             </tr>
         </thead>
