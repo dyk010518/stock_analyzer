@@ -2,8 +2,8 @@ import stockStatsStyles from '../../styles/StockStats.module.css'
 import { getAverage } from '../StockAnalyzer'
 
 
-const ProfitMargin = ({reports}) => {
-    const profitMargins = getProfitMargins(reports.IS)   
+const ProfitMargin = (props) => {
+    const profitMargins = getProfitMargins(props.reports.IS)   
     
     return (
         <thead>
@@ -17,9 +17,9 @@ const ProfitMargin = ({reports}) => {
                     <p2>{profitMargins[2]}%</p2>
                 </th>
                 <th className={stockStatsStyles.col}>
-                    <div><input type="number" id="quantity" name="quantity" min="1" max="5" /></div>
-                    <div><input type="number" id="quantity" name="quantity" min="1" max="5" /></div>
-                    <div><input type="number" id="quantity" name="quantity" min="1" max="5" /></div>
+                    <div><input type="number" id="ProfitMargin_input_1" name="quantity" /></div>
+                    <div><input type="number" id="ProfitMargin_input_2" name="quantity" /></div>
+                    <div><input type="number" id="ProfitMargin_input_4" name="quantity" /></div>
                 </th>
             </tr>
         </thead>

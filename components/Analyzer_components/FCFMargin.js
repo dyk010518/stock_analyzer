@@ -2,8 +2,8 @@ import stockStatsStyles from '../../styles/StockStats.module.css'
 import { getAverage } from '../StockAnalyzer'
 
 
-const FCFMargin = ({reports}) => {
-    const FCFMargins = getFCFMargins(reports.IS, reports.CF)   
+const FCFMargin = (props) => {
+    const FCFMargins = getFCFMargins(props.reports.IS, props.reports.CF)   
 
     return (
         <thead>
@@ -17,9 +17,9 @@ const FCFMargin = ({reports}) => {
                     <p2>{FCFMargins[2]}%</p2>
                 </th>
                 <th className={stockStatsStyles.col}>
-                    <div><input type="number" id="quantity" name="quantity" min="1" max="5" /></div>
-                    <div><input type="number" id="quantity" name="quantity" min="1" max="5" /></div>
-                    <div><input type="number" id="quantity" name="quantity" min="1" max="5" /></div>
+                    <div><input type="number" id="FCFMargin_input_1" name="quantity" /></div>
+                    <div><input type="number" id="FCFMargin_input_2" name="quantity" /></div>
+                    <div><input type="number" id="FCFMargin_input_4" name="quantity" /></div>
                 </th>
             </tr>
         </thead>
@@ -52,3 +52,10 @@ const getQuarterFCF = (CF, quarter) => {
 }
 
 export default FCFMargin
+
+const asd = {
+    1: 123,
+    2: 234
+}
+
+{1}

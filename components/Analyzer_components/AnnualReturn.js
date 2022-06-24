@@ -13,9 +13,9 @@ const AnnualReturn = () => {
                     <p2>-</p2>
                 </th>
                 <th className={stockStatsStyles.col}>
-                    <div><input type="number" id="quantity" name="quantity" min="1" max="5" /></div>
-                    <div><input type="number" id="quantity" name="quantity" min="1" max="5" /></div>
-                    <div><input type="number" id="quantity" name="quantity" min="1" max="5" /></div>
+                    <div><input type="number" id="AnnualReturn_input_1" name="quantity" /></div>
+                    <div><input type="number" id="AnnualReturn_input_2" name="quantity" /></div>
+                    <div><input type="number" id="AnnualReturn_input_4" name="quantity" /></div>
                 </th>
             </tr>
         </thead>

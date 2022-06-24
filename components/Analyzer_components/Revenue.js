@@ -1,8 +1,8 @@
 import stockStatsStyles from '../../styles/StockStats.module.css'
 import { getAverage } from '../StockAnalyzer'
 
-const Revenue = ({reports}) => {
-    const revenueGrowth = getRevenueNumbers(reports.IS)
+const Revenue = (props) => {
+    const revenueGrowth = getRevenueNumbers(props.reports.IS)
 
     return (
         <thead>
@@ -16,9 +16,9 @@ const Revenue = ({reports}) => {
                     <p2>{revenueGrowth[2]}%</p2>
                 </th>
                 <th className={stockStatsStyles.col}>
-                    <div><input type="number" id="quantity" name="quantity" min="1" max="5" /></div>
-                    <div><input type="number" id="quantity" name="quantity" min="1" max="5" /></div>
-                    <div><input type="number" id="quantity" name="quantity" min="1" max="5" /></div>
+                    <div><input type="number" id="revenue_input_1" name="quantity" /></div>
+                    <div><input type="number" id="revenue_input_2" name="quantity" /></div>
+                    <div><input type="number" id="revenue_input_4" name="quantity" /></div>
                 </th>
             </tr>
         </thead>
