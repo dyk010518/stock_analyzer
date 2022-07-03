@@ -1,7 +1,7 @@
 import {server} from '../config'
 import StockAnalyzer from '../components/StockAnalyzer'
 import SymbolSearch from '../components/SymbolSearch'
-import AnalyzeResult from '../components/AnalyzeResult'
+import AnalyzeResult from '../components/AnalyzeButton'
 // import Image from 'next/image'
 // import styles from '../styles/Home.module.css'
 
