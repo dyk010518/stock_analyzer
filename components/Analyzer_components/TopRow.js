@@ -7,7 +7,7 @@ const TopRow = () => {
             <tr className={topStyles.row}>
                 <th className={topStyles.col}></th>
                 <th className={topStyles.col}>Past Numbers</th>
-                <th className={topStyles.col}>My Assumptions</th>
+                <th className={topStyles.col}>My 10-Year Assumptions</th>
             </tr>
             <tr className={topStyles.row}>
                 <th className={topStyles.col}></th>
