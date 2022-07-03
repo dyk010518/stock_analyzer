@@ -9,8 +9,10 @@
 .main_container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 40vw;
     margin-bottom: 5vh;
+    /* background-color: #fcf6e5ff; */
 }
 
 .left_container {
