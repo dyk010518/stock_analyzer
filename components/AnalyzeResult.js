@@ -38,7 +38,7 @@ const getAnalyzedResults = (IS, BS) => {
     const [p_margin_low, p_margin_mid, p_margin_high] = [Number(document.getElementById("ProfitMargin_input_low").value)/100, Number(document.getElementById("ProfitMargin_input_mid").value)/100, Number(document.getElementById("ProfitMargin_input_high").value)/100] 
     const [fcf_margin_low, fcf_margin_mid, fcf_margin_high] = [Number(document.getElementById("FCFMargin_input_low").value)/100, Number(document.getElementById("FCFMargin_input_mid").value)/100, Number(document.getElementById("FCFMargin_input_high").value)/100] 
     const [pe_low, pe_mid, pe_high] = [Number(document.getElementById("PE_input_low").value), Number(document.getElementById("PE_input_mid").value), Number(document.getElementById("PE_input_high").value)] 
-    const [pfcf_low, pfcf_mid, pfcf_high] = [Number(document.getElementById("PFCF_input_low").value), Number(document.getElementById("PFCF_input_low").value), Number(document.getElementById("PFCF_input_low").value)] 
+    const [pfcf_low, pfcf_mid, pfcf_high] = [Number(document.getElementById("PFCF_input_low").value), Number(document.getElementById("PFCF_input_mid").value), Number(document.getElementById("PFCF_input_high").value)] 
     const [discount_low, discount_mid, discount_high] = [Number(document.getElementById("AnnualReturn_input_low").value)/100, Number(document.getElementById("AnnualReturn_input_mid").value)/100, Number(document.getElementById("AnnualReturn_input_high").value)/100] 
     
     return {
