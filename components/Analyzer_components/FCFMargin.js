@@ -17,9 +17,9 @@ const FCFMargin = (props) => {
                     <p2>{FCFMargins[2]}%</p2>
                 </th>
                 <th className={stockStatsStyles.col}>
-                    <div><input type="number" id="FCFMargin_input_1" name="quantity" /></div>
-                    <div><input type="number" id="FCFMargin_input_2" name="quantity" /></div>
-                    <div><input type="number" id="FCFMargin_input_4" name="quantity" /></div>
+                    <div><input type="number" id="FCFMargin_input_low" name="quantity" /></div>
+                    <div><input type="number" id="FCFMargin_input_mid" name="quantity" /></div>
+                    <div><input type="number" id="FCFMargin_input_high" name="quantity" /></div>
                 </th>
             </tr>
         </thead>

@@ -15,9 +15,9 @@ const PFCFRatio = (props) => {
                     <p2>-</p2>
                 </th>
                 <th className={stockStatsStyles.col}>
-                    <div><input type="number" id="PFCF_input_1" name="quantity" /></div>
-                    <div><input type="number" id="PFCF_input_2" name="quantity" /></div>
-                    <div><input type="number" id="PFCF_input_4" name="quantity" /></div>
+                    <div><input type="number" id="PFCF_input_low" name="quantity" /></div>
+                    <div><input type="number" id="PFCF_input_mid" name="quantity" /></div>
+                    <div><input type="number" id="PFCF_input_high" name="quantity" /></div>
                 </th>
             </tr>
         </thead>
