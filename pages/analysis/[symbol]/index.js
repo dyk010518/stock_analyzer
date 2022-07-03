@@ -25,7 +25,7 @@ const article = ({income_statement, balance_sheet, cash_flow, stock_info, price_
         {found && <StockTitle reports={reports}/>}
         <br />
         {found && <StockAnalyzer reports={reports}/>}
-        {found && <AnalyzeResult pressed={false} />}
+        {found && <AnalyzeResult pressed={false} reports={reports}/>}
         {!found && <h2>We couldn't find the symbol you typed. Please try again with a different symbol</h2>}
         <br />
         <Link href='/'>Go Back Home</Link>
