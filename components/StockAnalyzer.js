@@ -7,11 +7,14 @@ import FCFMargin from './Analyzer_components/FCFMargin'
 import PERatio from './Analyzer_components/PERatio'
 import PFCFRatio from './Analyzer_components/PFCFRatio'
 import AnnualReturn from './Analyzer_components/AnnualReturn'
+import Table from 'react-bootstrap/Table';
+
 
 
 
 const StockAnalyzer = ({reports}) => {
     return (
+        // <Table striped bordered hover>
         <table className={stockStyles.table}>
             <TopRow />
             <Revenue reports={reports} />
@@ -21,6 +24,7 @@ const StockAnalyzer = ({reports}) => {
             <PFCFRatio reports={reports}/>
             <AnnualReturn reports={reports}/>
         </table>
+        // </Table>
     )
 }
 
