@@ -8,7 +8,7 @@ const Meta = ({title, keywords, description}) => {
             <meta name='keywords' content={keywords} />
             <meta name='description' content={description} />
             <meta charSet='utf-8' />
-            <link rel='icon' href={prefix + '/favicon.ico'} />
+            <link rel='icon' href={prefix + '/stock_chart.png'} />
             <title>{title}</title>
         </Head> 
     )
