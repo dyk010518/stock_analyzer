@@ -8,7 +8,7 @@ import StockTitle from "../../../components/StockTitle"
 import {useState} from 'react'
 import AnalyzeReturn from "../../../components/AnalyzeReturn"
 import SymbolSearch from "../../../components/SymbolSearch"
-import {resetInputs} from "../../../utils"
+import {resetInputs, getAnalyzedResults} from "../../../utils"
 
 
 
