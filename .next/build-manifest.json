@@ -34,11 +34,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/analysis/[symbol].js"
-    ],
-    "/guide": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/guide.js"
     ]
   },
   "ampFirstPages": []
