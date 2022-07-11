@@ -1,32 +1,50 @@
 import Table from 'react-bootstrap/Table';
+import returnStyles from '../styles/AnalyzeReturn.module.css'
+
 
 const AnalyzeReturn = (props) => {
 
     return (
-        <Table striped bordered hover variant="dark">
+        <table className={returnStyles.table}>
             <thead>
-                <tr>
-                    <th></th>
-                    <th>Low</th>
-                    <th>Mid</th>
-                    <th>High</th>
+                <tr className={returnStyles.top_row}>
+                    <th className={returnStyles.top_col}></th>
+                    <th className={returnStyles.top_col}>Low</th>
+                    <th className={returnStyles.top_col}>Mid</th>
+                    <th className={returnStyles.top_col}>High</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Multiples Valuation</td>
-                    <td>{props.earningVals[0]}</td>
-                    <td>{props.earningVals[1]}</td>
-                    <td>{props.earningVals[2]}</td>
+                <tr className={returnStyles.row}>
+                    <th className={returnStyles.col}>
+                        <p1>Multiples Valuation</p1>
+                    </th>
+                    <th className={returnStyles.col}>
+                        <p2>{props.earningVals[0]}</p2>
+                    </th>
+                    <th className={returnStyles.col}>
+                        <p2>{props.earningVals[1]}</p2>
+                    </th>
+                    <th className={returnStyles.col}>
+                        <p2>{props.earningVals[2]}</p2>
+                    </th>
                 </tr>
-                <tr>
-                    <td>DCF Valuation</td>
-                    <td>{props.fcfVals[0]}</td>
-                    <td>{props.fcfVals[1]}</td>
-                    <td>{props.fcfVals[2]}</td>
+                <tr className={returnStyles.row}>
+                    <th className={returnStyles.col}>
+                        <p1>DCF Valuation</p1>
+                    </th>
+                    <th className={returnStyles.col}>
+                        <p2>{props.fcfVals[0]}</p2>
+                    </th>
+                    <th className={returnStyles.col}>
+                        <p2>{props.fcfVals[1]}</p2>
+                    </th>
+                    <th className={returnStyles.col}>
+                        <p2>{props.fcfVals[2]}</p2>
+                    </th>
                 </tr>
             </tbody>
-        </Table>
+        </table>
     )
 }
 
