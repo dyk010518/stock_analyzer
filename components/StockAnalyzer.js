@@ -28,14 +28,5 @@ const StockAnalyzer = ({reports}) => {
     )
 }
 
-const getAverage = (input_array) => {
-    let sum = 0
-    let irrelevant = 0
-    for(var i = 0; i < input_array.length; i++){
-        if(typeof input_array[i] == "number") sum += input_array[i]
-        if(typeof input_array[i] != "number") irrelevant ++
-    }
-    return input_array.length != irrelevant ? sum/(input_array.length-irrelevant) : undefined
-}
 
-export {StockAnalyzer, getAverage}
+export default StockAnalyzer
