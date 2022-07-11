@@ -2,12 +2,13 @@ import searchStyles from '../styles/SymbolSearch.module.css'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-const SymbolSearch = () => {
+const SymbolSearch = (props) => {
     const router = useRouter()
 
     const handleClick = (input) => {
         /[a-zA-Z]/.test(input.value) && router.push(`/analysis/${input.value.toUpperCase()}`)
         input.value = ""
+        if (props.individual) props.AnalysisOff()
     }
 
     return (

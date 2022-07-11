@@ -8,6 +8,7 @@ import StockTitle from "../../../components/StockTitle"
 import {useState} from 'react'
 import { getAverage } from '../../../components/StockAnalyzer'
 import AnalyzeReturn from "../../../components/AnalyzeReturn"
+import SymbolSearch from "../../../components/SymbolSearch"
 
 
 
@@ -24,6 +25,10 @@ const article = ({income_statement, balance_sheet, cash_flow, stock_info, price_
         setAnalyzed(state => !state)
     }
 
+    const AnalysisOff = () => {
+        setAnalyzed(analyzed = false)
+    }
+
     const reports = {
         IS: income_statement,
         BS: balance_sheet,
@@ -36,6 +41,8 @@ const article = ({income_statement, balance_sheet, cash_flow, stock_info, price_
 
     return <>
         <Meta />
+        <SymbolSearch AnalysisOff={AnalysisOff} individual={true}/>
+
         <div class="info-container">
             {found && <StockTitle reports={reports}/>}
             {found && <AnalyzeButton pressed={false} reports={reports} handleClick={handleClick}/>}
@@ -47,7 +54,7 @@ const article = ({income_statement, balance_sheet, cash_flow, stock_info, price_
         {analyzed && (
             <AnalyzeReturn earningVals={earningVals} fcfVals={fcfVals}/>
         )}
-        <Link href='/'>Go Back Home</Link>
+        {/* <Link href='/'>Go Back Home</Link> */}
         
     </>
 }

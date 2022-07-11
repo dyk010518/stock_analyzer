@@ -7,12 +7,14 @@ import AnalyzeResult from '../components/AnalyzeButton'
 
 const testvar = true
 
-export default function Home({articles}) {
+export default function Home() {
   return (
     <div>
-      {/* <SymbolSearch /> */}
-      {/* <StockAnalyzer />
-      <AnalyzeResult pressed={testvar} /> */}
+      <SymbolSearch individual={false}/>
+      <h1>Warning:</h1>
+      <h3>This website is not designed to support mobile yet.</h3>
+      <h3>Only US-based stocks are well supported for now.</h3>
+      <h3>There could be a few bugs with abnormal events, such as stock-splits.</h3>
     </div>
     
   )
