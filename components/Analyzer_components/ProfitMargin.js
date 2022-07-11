@@ -1,5 +1,5 @@
 import stockStatsStyles from '../../styles/StockStats.module.css'
-import { getAverage } from '../StockAnalyzer'
+import { getAverage } from '../../utils'
 
 
 const ProfitMargin = (props) => {
