@@ -22,7 +22,7 @@ const article = ({income_statement, balance_sheet, cash_flow, stock_info, price_
         const analysisResult = getAnalyzedResults(income_statement, balance_sheet)
         earningVals = analysisResult['earningsVals']
         fcfVals = analysisResult['fcfVals']
-        setAnalyzed(analyzed = true)
+        setAnalyzed(state = !state)
     }
 
     const AnalysisOff = () => {
