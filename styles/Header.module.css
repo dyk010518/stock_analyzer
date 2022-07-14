@@ -2,6 +2,7 @@
 .title span {
     color: #d5a82aff;
     text-decoration: none;
+    text-shadow: 2px 2px 4px #000;
 }
 
 .title a:hover,
@@ -15,6 +16,8 @@
   line-height: 1.15;
   font-size: 4rem;
   margin-bottom: 5vh;
+  color: #ccc;
+  text-shadow: 2px 2px 4px #000;
 }
 
 .title,

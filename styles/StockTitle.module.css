@@ -12,7 +12,10 @@
     align-items: center;
     width: 40vw;
     margin-bottom: 2vh;
-    /* background-color: #fcf6e5ff; */
+    background-color: #fff;
+    border: 2px solid #222;
+    padding: 5px 30px;
+    border-radius: 20px;
 }
 
 .left_container {
