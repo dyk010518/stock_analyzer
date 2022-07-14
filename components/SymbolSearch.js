@@ -14,7 +14,7 @@ const SymbolSearch = (props) => {
     return (
         <div className={searchStyles.container}>
             <input type='text' id="userInput" placeholder='Search Stock Symbol' className={searchStyles.search}></input>
-            {typeof window !=='undefined' && (document.getElementById("userInput").value = "")}
+            {(typeof window !=='undefined' && document.getElementById("userInput")) && (document.getElementById("userInput").value = "")}
             <button className={searchStyles.button} onClick={() => handleClick(document.getElementById("userInput"))}><img src="/search.png" className={searchStyles.glass}></img></button>
         </div>
     )

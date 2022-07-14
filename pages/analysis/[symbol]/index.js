@@ -17,17 +17,19 @@ let earningVals, fcfVals
 
 const article = ({income_statement, balance_sheet, cash_flow, stock_info, price_info,}) => {
     const [analyzed, setAnalyzed] = useState(false);
+    const [earningVals, setEarningVals] = useState(false);
+    const [fcfVals, setFcfVals] = useState(false);
 
     const handleClick = () => {
         const analysisResult = getAnalyzedResults(income_statement, balance_sheet)
-        earningVals = analysisResult['earningsVals']
-        fcfVals = analysisResult['fcfVals']
+        setEarningVals(earningVals = analysisResult['earningsVals'])
+        setFcfVals(fcfVals = analysisResult['fcfVals'])
         setAnalyzed(analyzed = true)
     }
 
     const AnalysisOff = () => {
         setAnalyzed(analyzed = false)
-        resetInputs()
+        found && resetInputs()
     }
 
     const reports = {
