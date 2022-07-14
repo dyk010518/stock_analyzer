@@ -5,12 +5,18 @@
     height: 4vh;
 }
 
-.col {
+.col1 {
     width: 33.33%;
     padding: 0%;
 }
 
-.col p2, .col div {
+.col {
+    width: 33.33%;
+    padding: 0%;
+    border-bottom: 2px solid #c9b475;
+}
+
+.col p2, .col div, .col1 p2, .col1 div {
     font-size: 12pt;
     display: inline-block;
     width: 33.33%;
@@ -18,7 +24,13 @@
 
 
 
-.col input {
+.col input, .col1 input {
     width: 50%;
+    height: 2.5vh;
     text-align: center;
+    background-color: #fcf6e5ff;
+    border: 2px solid #c9b475;
+    border-radius: 10%;
+    color: #7f6000;
+    font-size: 12pt;
 }

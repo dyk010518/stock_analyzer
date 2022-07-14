@@ -6,8 +6,8 @@ const TopRow = () => {
         <thead>
             <tr className={topStyles.row}>
                 <th className={topStyles.col}></th>
-                <th className={topStyles.col}>Past Numbers</th>
-                <th className={topStyles.col}>My 10-Year Assumptions</th>
+                <th className={topStyles.col1}>Past Numbers</th>
+                <th className={topStyles.col1}>My 10-Year Assumptions</th>
             </tr>
             <tr className={topStyles.row}>
                 <th className={topStyles.col}></th>
