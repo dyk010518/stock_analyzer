@@ -17,9 +17,9 @@ const ProfitMargin = (props) => {
                     <p2>{profitMargins[2]}%</p2>
                 </th>
                 <th className={stockStatsStyles.col}>
-                    <div><input type="number" id="ProfitMargin_input_low" name="quantity" /></div>
-                    <div><input type="number" id="ProfitMargin_input_mid" name="quantity" /></div>
-                    <div><input type="number" id="ProfitMargin_input_high" name="quantity" /></div>
+                    <div><input type="number" id="ProfitMargin_input_low" name="quantity" />  %</div>
+                    <div><input type="number" id="ProfitMargin_input_mid" name="quantity" />  %</div>
+                    <div><input type="number" id="ProfitMargin_input_high" name="quantity" />  %</div>
                 </th>
             </tr>
         </thead>
