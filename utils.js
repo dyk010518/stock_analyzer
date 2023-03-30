@@ -25,8 +25,12 @@ export const getAnalyzedResults = (IS, BS) => {
     const [discount_low, discount_mid, discount_high] = [Number(document.getElementById("AnnualReturn_input_low").value)/100, Number(document.getElementById("AnnualReturn_input_mid").value)/100, Number(document.getElementById("AnnualReturn_input_high").value)/100] 
     
     return {
-        'earningsVals': [getDiscountedVal(last_revenue, shares, growth_low, p_margin_low, pe_low, discount_low), getDiscountedVal(last_revenue, shares, growth_mid, p_margin_mid, pe_mid, discount_mid), getDiscountedVal(last_revenue, shares, growth_high, p_margin_high, pe_high, discount_high)],
-        'fcfVals': [getDiscountedVal(last_revenue, shares, growth_low, fcf_margin_low, pfcf_low, discount_low), getDiscountedVal(last_revenue, shares, growth_mid, fcf_margin_mid, pfcf_mid, discount_mid), getDiscountedVal(last_revenue, shares, growth_high, fcf_margin_high, pfcf_high, discount_high)],
+        'earningsVals': [getDiscountedVal(last_revenue, shares, growth_low, p_margin_low, pe_low, discount_low), 
+                         getDiscountedVal(last_revenue, shares, growth_mid, p_margin_mid, pe_mid, discount_mid), 
+                         getDiscountedVal(last_revenue, shares, growth_high, p_margin_high, pe_high, discount_high)],
+        'fcfVals': [getDiscountedVal(last_revenue, shares, growth_low, fcf_margin_low, pfcf_low, discount_low), 
+                    getDiscountedVal(last_revenue, shares, growth_mid, fcf_margin_mid, pfcf_mid, discount_mid),
+                    getDiscountedVal(last_revenue, shares, growth_high, fcf_margin_high, pfcf_high, discount_high)],
     }
 }
 
