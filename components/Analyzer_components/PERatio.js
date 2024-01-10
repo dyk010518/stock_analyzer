@@ -1,6 +1,4 @@
 import stockStatsStyles from '../../styles/StockStats.module.css'
-import { getAverage } from '../../utils'
-
 
 const PERatio = (props) => {
     const PERatio = getPERatio(props.reports.IS, props.reports.BS, props.reports.PI)

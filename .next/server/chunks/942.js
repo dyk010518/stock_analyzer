@@ -442,7 +442,6 @@ const asd = {
 ;// CONCATENATED MODULE: ./components/Analyzer_components/PERatio.js
 
 
-
 const PERatio = (props)=>{
     const PERatio1 = getPERatio(props.reports.IS, props.reports.BS, props.reports.PI);
     return /*#__PURE__*/ jsx_runtime_.jsx("thead", {
