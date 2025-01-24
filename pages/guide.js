@@ -30,18 +30,6 @@ const Guide = () => {
 
         
     </>
-
-        // <div className="slide-container">
-        //     <Slide>
-        //         {slideGifs.map((slideGif, index)=> (
-        //             <div className="each-slide" key={index}>
-        //                 <div style={{'backgroundImage': `url(${slideGif.url})`}}>
-        //                     <span>{slideGif.caption}</span>
-        //                 </div>
-        //             </div>
-        //         ))} 
-        //     </Slide>
-        // </div>
 }
 
 export default Guide
