@@ -16,8 +16,12 @@ const instrusctions = {
 const Guide = () => {
     const [step, setStep] = useState(0);
 
-    const handleClick = () => {
-        setStep(step = (step+1)%3)
+    const handlePrevious = () => {
+        step > 0 && setStep(step = Math.abs(step-1) % 3)
+    }
+
+    const handleNext = () => {
+        step < 2 && setStep(step = Math.abs(step+1) % 3)
     }
 
     return <>
@@ -26,7 +30,8 @@ const Guide = () => {
         {step == 2 && <Image src={Step3} alt="my gif" height={500} width={800} /> }
         <h2>{instrusctions[step]}</h2>
 
-        <button onClick={handleClick}>Move</button>
+        <button onClick={handlePrevious}>Previous</button>
+        <button onClick={handleNext}>Next</button>
 
         
     </>
