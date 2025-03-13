@@ -1,10 +1,5 @@
 {
-  "/_error": "pages/_error.js",
-  "/api/articles": "pages/api/articles.js",
   "/_app": "pages/_app.js",
-  "/_document": "pages/_document.js",
-  "/guide": "pages/guide.html",
-  "/": "pages/index.html",
-  "/analysis/[symbol]": "pages/analysis/[symbol].js",
-  "/404": "pages/404.html"
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js"
 }
