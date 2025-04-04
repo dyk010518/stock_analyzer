@@ -5,7 +5,7 @@ export const resetInputs = () => {
         "FCFMargin_input_low", "FCFMargin_input_mid", "FCFMargin_input_high",
         "PE_input_low", "PE_input_mid", "PE_input_high",
         "PFCF_input_low", "PFCF_input_mid", "PFCF_input_high",
-        "AnnualReturn_input_low", "AnnualReturn_input_mid", "AnnualReturn_input_high"
+        "DiscountRate_input_low", "DiscountRate_input_mid", "DiscountRate_input_high"
     ]
 
     for(var i = 0; i < element_ids.length; i++){
@@ -22,7 +22,7 @@ export const getAnalyzedResults = (IS, BS) => {
     const [fcf_margin_low, fcf_margin_mid, fcf_margin_high] = [Number(document.getElementById("FCFMargin_input_low").value)/100, Number(document.getElementById("FCFMargin_input_mid").value)/100, Number(document.getElementById("FCFMargin_input_high").value)/100] 
     const [pe_low, pe_mid, pe_high] = [Number(document.getElementById("PE_input_low").value), Number(document.getElementById("PE_input_mid").value), Number(document.getElementById("PE_input_high").value)] 
     const [pfcf_low, pfcf_mid, pfcf_high] = [Number(document.getElementById("PFCF_input_low").value), Number(document.getElementById("PFCF_input_mid").value), Number(document.getElementById("PFCF_input_high").value)] 
-    const [discount_low, discount_mid, discount_high] = [Number(document.getElementById("AnnualReturn_input_low").value)/100, Number(document.getElementById("AnnualReturn_input_mid").value)/100, Number(document.getElementById("AnnualReturn_input_high").value)/100] 
+    const [discount_low, discount_mid, discount_high] = [Number(document.getElementById("DiscountRate_input_low").value)/100, Number(document.getElementById("DiscountRate_input_mid").value)/100, Number(document.getElementById("DiscountRate_input_high").value)/100] 
     
     return {
         'earningsVals': [getDiscountedVal(last_revenue, shares, growth_low, p_margin_low, pe_low, discount_low), 
