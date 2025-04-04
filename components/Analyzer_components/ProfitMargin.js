@@ -32,12 +32,13 @@ const getProfitMargins = (IS) => {
     const year_two = number_of_quarters >= 8 ? getAverage([getQuarterProfitMargin(IS, 4), getQuarterProfitMargin(IS, 5), getQuarterProfitMargin(IS, 6), getQuarterProfitMargin(IS, 7)]) : undefined
     const year_three = number_of_quarters >= 12 ? getAverage([getQuarterProfitMargin(IS, 8), getQuarterProfitMargin(IS, 9), getQuarterProfitMargin(IS, 10), getQuarterProfitMargin(IS, 11)]) : undefined
     const year_four = number_of_quarters >= 16 ? getAverage([getQuarterProfitMargin(IS, 12), getQuarterProfitMargin(IS, 13), getQuarterProfitMargin(IS, 14), getQuarterProfitMargin(IS, 15)]) : undefined
+    const year_five = number_of_quarters >= 20 ? getAverage([getQuarterProfitMargin(IS, 16), getQuarterProfitMargin(IS, 17), getQuarterProfitMargin(IS, 18), getQuarterProfitMargin(IS, 19)]) : undefined
 
     const pm_one = year_one && year_two ? (year_one*100).toFixed(2) : "N/A"
-    const pm_two = year_one && year_two ? (getAverage([year_one, year_two])*100).toFixed(2) : "N/A"
-    const pm_four = year_one && year_two && year_three && year_four ? (getAverage([year_one, year_two, year_three, year_four])*100).toFixed(2) : "N/A"
+    const pm_three = year_one && year_two && year_three ? (getAverage([year_one, year_two, year_three])*100).toFixed(2) : "N/A"
+    const pm_five = year_one && year_two && year_three && year_four && year_five ? (getAverage([year_one, year_two, year_three, year_four, year_five])*100).toFixed(2) : "N/A"
 
-    return [pm_one, pm_two, pm_four]
+    return [pm_one, pm_three, pm_five]
 }
 
 const getQuarterProfitMargin = (IS, quarter) => {

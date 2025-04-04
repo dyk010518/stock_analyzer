@@ -32,12 +32,13 @@ const getFCFMargins = (IS, CF) => {
     const year_two = number_of_quarters >= 8 ? getAverage([getQuarterlyFCFMargin(IS, CF, 4), getQuarterlyFCFMargin(IS, CF, 5), getQuarterlyFCFMargin(IS, CF, 6), getQuarterlyFCFMargin(IS, CF, 7)]) : undefined
     const year_three = number_of_quarters >= 12 ? getAverage([getQuarterlyFCFMargin(IS, CF, 8), getQuarterlyFCFMargin(IS, CF, 9), getQuarterlyFCFMargin(IS, CF, 10), getQuarterlyFCFMargin(IS, CF, 11)]) : undefined
     const year_four = number_of_quarters >= 16 ? getAverage([getQuarterlyFCFMargin(IS, CF, 12), getQuarterlyFCFMargin(IS, CF, 13), getQuarterlyFCFMargin(IS, CF, 14), getQuarterlyFCFMargin(IS, CF, 15)]) : undefined
+    const year_five = number_of_quarters >= 20 ? getAverage([getQuarterlyFCFMargin(IS, CF, 13), getQuarterlyFCFMargin(IS, CF, 14), getQuarterlyFCFMargin(IS, CF, 15), getQuarterlyFCFMargin(IS, CF, 16)]) : undefined
 
     const fm_one = year_one && year_two ? (year_one*100).toFixed(2) : "N/A"
-    const fm_two = year_one && year_two ? (getAverage([year_one, year_two])*100).toFixed(2) : "N/A"
-    const fm_four = year_one && year_two && year_three && year_four ? (getAverage([year_one, year_two, year_three, year_four])*100).toFixed(2) : "N/A"
+    const fm_three = year_one && year_two && year_three ? (getAverage([year_one, year_two, year_three])*100).toFixed(2) : "N/A"
+    const fm_five = year_one && year_two && year_three && year_four && year_five ? (getAverage([year_one, year_two, year_three, year_four, year_five])*100).toFixed(2) : "N/A"
 
-    return [fm_one, fm_two, fm_four]
+    return [fm_one, fm_three, fm_five]
 }
 
 const getQuarterlyFCFMargin = (IS, CF, quarter) => {
