@@ -13,8 +13,8 @@ const TopRow = () => {
                 <th className={topStyles.col}></th>
                 <th className={topStyles.col}>
                     <p2>1 year</p2>
-                    <p2>2 year</p2>
-                    <p2>4 year</p2>
+                    <p2>3 year</p2>
+                    <p2>5 year</p2>
                 </th>
                 <th className={topStyles.col}>
                     <p2>Low</p2>
