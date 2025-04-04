@@ -6,7 +6,7 @@ import ProfitMargin from './Analyzer_components/ProfitMargin'
 import FCFMargin from './Analyzer_components/FCFMargin'
 import PERatio from './Analyzer_components/PERatio'
 import PFCFRatio from './Analyzer_components/PFCFRatio'
-import AnnualReturn from './Analyzer_components/AnnualReturn'
+import DiscountRate from './Analyzer_components/DiscountRate'
 import Table from 'react-bootstrap/Table';
 
 
@@ -22,7 +22,7 @@ const StockAnalyzer = ({reports}) => {
             <FCFMargin reports={reports}/>
             <PERatio reports={reports}/>
             <PFCFRatio reports={reports}/>
-            <AnnualReturn reports={reports}/>
+            <DiscountRate reports={reports}/>
         </table>
         // </Table>
     )
