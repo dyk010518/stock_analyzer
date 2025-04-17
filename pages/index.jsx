@@ -9,12 +9,12 @@ const testvar = true
 
 export default function Home() {
   return (
-    <div>
+    <main>
       <SymbolSearch individual={false}/>
       <h1>Warning:</h1>
       <h3>This website is not designed to support mobile yet.</h3>
       <h3>There could be a few bugs with abnormal events, such as stock-splits.</h3>
-    </div>
+    </main>
     
   )
 }
