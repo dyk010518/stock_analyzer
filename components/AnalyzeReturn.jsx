@@ -1,46 +1,53 @@
-import Table from 'react-bootstrap/Table';
-import returnStyles from '../styles/AnalyzeReturn.module.css'
-
-
 const AnalyzeReturn = (props) => {
-
     return (
-        <table className={returnStyles.table}>
+        <table className="w-[50vw]">
             <thead>
-                <tr className={returnStyles.top_row}>
-                    <th className={returnStyles.top_col}></th>
-                    <th className={returnStyles.top_col}>Low</th>
-                    <th className={returnStyles.top_col}>Mid</th>
-                    <th className={returnStyles.top_col}>High</th>
+                <tr className="bg-[#d5a82aff] text-white h-12">
+                    <th></th>
+                    <th>Low</th>
+                    <th>Mid</th>
+                    <th>High</th>
                 </tr>
             </thead>
             <tbody>
-                <tr className={returnStyles.row}>
-                    <th className={returnStyles.col}>
+                <tr className="bg-[#fcf6e5ff] text-[#7f6000] h-8">
+                    <th className="w-1/4">
                         <p1>Multiples Valuation</p1>
                     </th>
-                    <th className={returnStyles.col}>
-                        <p2>{props.earningVals[0]}</p2>
+                    <th className="w-1/4">
+                        <p className="text-xl inline-block">
+                            {props.earningVals[0]}
+                        </p>
                     </th>
-                    <th className={returnStyles.col}>
-                        <p2>{props.earningVals[1]}</p2>
+                    <th className="w-1/4">
+                        <p className="text-xl inline-block">
+                            {props.earningVals[1]}
+                        </p>
                     </th>
-                    <th className={returnStyles.col}>
-                        <p2>{props.earningVals[2]}</p2>
+                    <th className="w-1/4">
+                        <p className="text-xl inline-block">
+                            {props.earningVals[2]}
+                        </p>
                     </th>
                 </tr>
-                <tr className={returnStyles.row}>
-                    <th className={returnStyles.col}>
+                <tr className="bg-[#fcf6e5ff] text-[#7f6000] h-8">
+                    <th className="w-1/4">
                         <p1>DCF Valuation</p1>
                     </th>
-                    <th className={returnStyles.col}>
-                        <p2>{props.fcfVals[0]}</p2>
+                    <th className="w-1/4">
+                        <p className="text-xl inline-block">
+                            {props.fcfVals[0]}
+                        </p>
                     </th>
-                    <th className={returnStyles.col}>
-                        <p2>{props.fcfVals[1]}</p2>
+                    <th className="w-1/4">
+                        <p className="text-xl inline-block">
+                            {props.fcfVals[1]}
+                        </p>
                     </th>
-                    <th className={returnStyles.col}>
-                        <p2>{props.fcfVals[2]}</p2>
+                    <th className="w-1/4">
+                        <p className="text-xl inline-block">
+                            {props.fcfVals[2]}
+                        </p>
                     </th>
                 </tr>
             </tbody>
