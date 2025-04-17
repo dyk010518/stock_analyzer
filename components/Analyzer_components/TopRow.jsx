@@ -1,29 +1,33 @@
-import topStyles from '../../styles/TopRow.module.css'
-
-
 const TopRow = () => {
+    const cellClass = "w-1/3 p-0 border-b-2 border-white";
+    const labelClass = "text-[14pt] inline-block w-1/3";
+
     return (
         <thead>
-            <tr className={topStyles.row}>
-                <th className={topStyles.col}></th>
-                <th className={topStyles.col1}>Past Numbers</th>
-                <th className={topStyles.col1}>My 10-Year Assumptions</th>
+            <tr className="bg-[#d5a82a] text-white h-8">
+                <th className="w-1/3"></th>
+                <th className={cellClass}>Past Numbers</th>
+                <th className={cellClass}>My 10-Year Assumptions</th>
             </tr>
-            <tr className={topStyles.row}>
-                <th className={topStyles.col}></th>
-                <th className={topStyles.col}>
-                    <p2>1 year</p2>
-                    <p2>3 year</p2>
-                    <p2>5 year</p2>
+            <tr className="bg-[#d5a82a] text-white h-8">
+                <th className="w-1/3"></th>
+                <th className="w-1/3">
+                    {["1 year", "3 year", "5 year"].map((label) => (
+                        <p key={label} className={labelClass}>
+                            {label}
+                        </p>
+                    ))}
                 </th>
-                <th className={topStyles.col}>
-                    <p2>Low</p2>
-                    <p2>Mid</p2>
-                    <p2>High</p2>
+                <th className="w-1/3">
+                    {["Low", "Mid", "High"].map((label) => (
+                        <p key={label} className={labelClass}>
+                            {label}
+                        </p>
+                    ))}
                 </th>
             </tr>
         </thead>
-    )
-}
+    );
+};
 
-export default TopRow
+export default TopRow;
