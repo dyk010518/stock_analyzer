@@ -1,10 +1,9 @@
 import Link from 'next/link'
-import navStyles from '../styles/Nav.module.css'
 
 const Nav = () => {
     return (
-        <nav className={navStyles.nav}>
-            <ul>
+        <nav className="h-12 px-16 bg-[#333333] text-white flex justify-start items-center">
+            <ul className="flex flex-row justify-center items-center list-none space-x-8">
                 <li>
                     <Link href='/'>Stock Analyzer</Link>
                 </li>
