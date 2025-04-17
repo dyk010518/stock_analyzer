@@ -1,5 +1,3 @@
-import stockTitleStyle from "../styles/StockTitle.module.css"
-
 const StockTitle = ({reports}) => {
     const symbol = reports.SI["Symbol"]
     const name = reports.SI["Name"]
@@ -10,15 +8,15 @@ const StockTitle = ({reports}) => {
     const difference_percent = Number(reports.PI["dp"]).toFixed(2)
 
     return (
-        <div className={stockTitleStyle.main_container}>
-            <div className={stockTitleStyle.left_container}>
+        <div className="flex justify-between items-center w-[40vw] mb-8 bg-gray-400 border-2 border-[#222] px-16 py-8 rounded-lg">
+            <div>
                 <h2>{name} ({symbol})</h2>
                 <p>{exchange} | Currency in {currency}</p>
             </div>
-            <div className={stockTitleStyle.right_container}>
+            <div>
                 <h2>{current_price}</h2>
-                {difference >= 0 && <p className={stockTitleStyle.positive}>{difference} ({difference_percent}%)</p>}
-                {difference < 0 && <p className={stockTitleStyle.negative}>{difference} ({difference_percent}%)</p>}
+                {difference >= 0 && <p className="text-green-700">+{difference} ({difference_percent}%)</p>}
+                {difference < 0 && <p className="text-red-700">{difference} ({difference_percent}%)</p>}
             </div>
         </div>
     )
