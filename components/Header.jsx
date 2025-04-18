@@ -1,23 +1,15 @@
+import { motion } from "framer-motion"
+
 const Header = () => {
     return (
-        <div>
-            <h1
-                className="text-[4rem] mb-16 leading-[1.15] text-[#aaa] text-center"
-                style={{
-                    textShadow: '1px 0 0 #aaa, 0 -1px 0 #aaa, 0 1px 0 #aaa, -1px 0 0 #aaa',
-                }}
-            >
-                <span
-                    className="text-[#d5a82a]"
-                    style={{
-                        textShadow: '1px 0 0 #aaa, 0 -1px 0 #aaa, 0 1px 0 #aaa, -1px 0 0 #aaa',
-                    }}
-                >
-                    Stock
-                </span>{' '}
-                Analyzer
-            </h1>
-        </div>
+        <motion.h1 
+            className="text-6xl font-bold text-primary-300 mb-6 text-center"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+        >
+            Stock Analyzer
+        </motion.h1>
     )
 }
 
