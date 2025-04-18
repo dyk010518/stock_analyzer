@@ -38,7 +38,7 @@ const stockHome = ({income_statement, balance_sheet, cash_flow, stock_info, pric
 
     const found = income_statement.symbol ? true : false  
 
-    return <main className="bg-gray-900 min-h-screen flex flex-col justify-center items-center">
+    return <main className="bg-gray-900 min-h-screen flex flex-col items-center pt-24">
         <Meta />
         <Header />
         <SymbolSearch AnalysisOff={AnalysisOff} individual={true}/>

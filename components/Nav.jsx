@@ -9,11 +9,11 @@ const Nav = () => {
                         Stock Analyzer
                     </Link>
                 </li>
-                <li>
+                {/* <li>
                     <Link href='/guide'>
                         Guide
                     </Link>
-                </li>
+                </li> */}
             </ul>
         </nav>
     )
