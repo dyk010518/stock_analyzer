@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import prefix from '../prefix'
+import prefix from '../config/prefix'
 
 const Meta = ({title, keywords, description}) => {
     return (
