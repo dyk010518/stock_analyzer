@@ -1,18 +1,13 @@
-const AnalyzeButton = (props) => {
-
+const AnalyzeButton = ({ handleClick }) => {
     return (
-        <div className="flex justify-center mt-8">
-
+        <div className="flex justify-center ml-8 mt-8 mb-16">
             <button 
-                className="bg-[#fff143] text-white text-2xl h-12 w-44"
-                onClick={props.handleClick}
+                className="bg-primary-300 hover:bg-primary-400 text-black font-semibold text-xl px-6 py-8 rounded-xl shadow-md transition-all duration-300 ease-in-out"
+                onClick={handleClick}
             >
                 Analyze
             </button>
         </div>
     )
 }
-
-
-
 export default AnalyzeButton
