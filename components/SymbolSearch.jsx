@@ -20,12 +20,12 @@ const SymbolSearch = (props) => {
                 type="text"
                 id="userInput"
                 placeholder="Search Stock Symbol"
-                className="h-10 w-72 text-xl text-gray-700 pl-4"
+                className="h-10 w-72 text-xl text-gray-700 pl-4 mr-1 rounded-full"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
             />
             <button 
-                className="h-10 w-10 bg-gray-400 flex items-center justify-center"
+                className="h-10 w-10 bg-gray-400 flex items-center justify-center rounded-full hover:bg-gray-500 duration-200"
                 onClick={handleClick}
             >
                 <Image 
