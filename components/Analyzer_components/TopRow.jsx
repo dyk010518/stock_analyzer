@@ -1,30 +1,32 @@
 const TopRow = () => {
-    const cellClass = "w-1/3 p-0 border-b-2 border-black";
-    const labelClass = "text-[14pt] inline-block w-1/3";
-
     return (
-        <thead>
-            <tr className="bg-primary-300 text-black h-8">
-                <th className="w-1/3"></th>
-                <th className={cellClass}>Past Numbers</th>
-                <th className={cellClass}>My 10-Year Assumptions</th>
+        <thead className="text-white">
+            <tr className="bg-white/10">
+                <th className="border-b border-white/20 w-1/4" rowSpan={2} />
+                <th className="py-2 text-xl font-semibold border-b border-white/20 text-primary-300 w-1/3" colSpan={3}>
+                    {"Past Numbers"}
+                </th>
+                <th className="py-2 text-xl font-semibold border-b border-white/20 text-primary-300" colSpan={3}>
+                    {"10-Year Assumptions"}
+                </th>
             </tr>
-            <tr className="bg-primary-300 text-black h-8">
-                <th className="w-1/3"></th>
-                <th className="w-1/3">
-                    {["1 year", "3 year", "5 year"].map((label) => (
-                        <p key={label} className={labelClass}>
-                            {label}
-                        </p>
-                    ))}
-                </th>
-                <th className="w-1/3">
-                    {["Low", "Mid", "High"].map((label) => (
-                        <p key={label} className={labelClass}>
-                            {label}
-                        </p>
-                    ))}
-                </th>
+            <tr className="bg-white/10">
+                {["1 year", "3 year", "5 year"].map((header, idx) => (
+                    <th
+                        key={`g1-${idx}`}
+                        className="py-2 px-4 text-md font-medium border-b border-white/15 text-white"
+                    >
+                        {header}
+                    </th>
+                ))}
+                {["Bear", "Base", "Bull"].map((header, idx) => (
+                    <th
+                        key={`g2-${idx}`}
+                        className="py-2 px-4 text-md font-medium border-b border-white/15 text-white"
+                    >
+                        {header}
+                    </th>
+                ))}
             </tr>
         </thead>
     );

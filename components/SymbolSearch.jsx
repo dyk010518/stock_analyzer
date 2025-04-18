@@ -14,6 +14,12 @@ const SymbolSearch = (props) => {
         if (props.individual) props.AnalysisOff()
     }
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleClick()
+        }
+    }
+
     return (
         <div className="flex justify-center mb-8">
             <input 
@@ -23,6 +29,7 @@ const SymbolSearch = (props) => {
                 className="h-10 w-72 text-xl text-gray-700 pl-4 mr-2 rounded-full"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={handleKeyDown}
             />
             <button 
                 className="h-10 w-10 bg-gray-400 flex items-center justify-center rounded-full hover:bg-gray-500 duration-200"
@@ -31,8 +38,8 @@ const SymbolSearch = (props) => {
                 <Image 
                     src="/search.png" 
                     alt="Search" 
-                    width={24} // You can set the width and height as needed
-                    height={24} 
+                    width={24}
+                    height={24}
                 />
             </button>
         </div>
