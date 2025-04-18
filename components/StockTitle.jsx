@@ -1,4 +1,4 @@
-const StockTitle = ({reports}) => {
+const StockTitle = ({ reports }) => {
     const symbol = reports.SI["Symbol"]
     const name = reports.SI["Name"]
     const exchange = reports.SI["Exchange"]
@@ -8,19 +8,21 @@ const StockTitle = ({reports}) => {
     const difference_percent = Number(reports.PI["dp"]).toFixed(2)
 
     return (
-        <div className="flex justify-between items-center w-[40vw] mb-8 bg-gray-100 px-16 py-8 rounded-lg shadow-[0_0_12px_2px_rgba(255,255,255,0.5)]">
+        <div className="w-full max-w-3xl bg-white/5 border border-white/20 shadow-[0_4px_20px_rgba(255,255,255,0.15)] rounded-2xl px-10 py-6 mb-10 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-                <p>{name} ({symbol})</p>
-                <p>{exchange} | Currency in {currency}</p>
+                <h className="text-xl sm:text-2xl font-semibold">{name} <span className="text-primary-300">({symbol})</span></h>
+                <p className="text-sm text-gray-300">{exchange} · Currency in {currency}</p>
             </div>
-            <div>
-                <h2>{current_price}</h2>
-                {difference >= 0 && <p className="text-green-700">+{difference} ({difference_percent}%)</p>}
-                {difference < 0 && <p className="text-red-700">{difference} ({difference_percent}%)</p>}
+            <div className="text-right">
+                <p className="text-2xl font-bold">{current_price}</p>
+                {difference >= 0 ? (
+                    <p className="text-green-400">+{difference} (+{difference_percent}%)</p>
+                ) : (
+                    <p className="text-red-400">{difference} ({difference_percent}%)</p>
+                )}
             </div>
         </div>
     )
 }
-
 
 export default StockTitle
