@@ -4,9 +4,9 @@ const AnalyzeReturn = (props) => {
             <thead>
                 <tr className="bg-[#fff143] text-white h-12">
                     <th></th>
-                    <th>Low</th>
-                    <th>Mid</th>
-                    <th>High</th>
+                    <th>Bear</th>
+                    <th>Base</th>
+                    <th>Bull</th>
                 </tr>
             </thead>
             <tbody>
