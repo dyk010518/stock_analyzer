@@ -5,6 +5,7 @@ import FCFMargin from './Analyzer_components/FCFMargin'
 import PERatio from './Analyzer_components/PERatio'
 import PFCFRatio from './Analyzer_components/PFCFRatio'
 import DiscountRate from './Analyzer_components/DiscountRate'
+import FuturisticTable from './FuturisticTable'
 
 
 
@@ -12,6 +13,7 @@ import DiscountRate from './Analyzer_components/DiscountRate'
 const StockAnalyzer = ({reports}) => {
     return (
         <table className="w-[80vw]">
+            {/* <FuturisticTable /> */}
             <TopRow />
             <Revenue reports={reports} />
             <ProfitMargin reports={reports}/>

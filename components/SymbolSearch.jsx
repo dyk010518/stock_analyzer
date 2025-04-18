@@ -20,7 +20,7 @@ const SymbolSearch = (props) => {
                 type="text"
                 id="userInput"
                 placeholder="Search Stock Symbol"
-                className="h-10 w-72 text-xl text-gray-700 pl-4 mr-1 rounded-full"
+                className="h-10 w-72 text-xl text-gray-700 pl-4 mr-2 rounded-full"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
             />

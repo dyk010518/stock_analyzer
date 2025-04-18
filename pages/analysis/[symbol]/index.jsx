@@ -6,9 +6,10 @@
     import AnalyzeReturn from "../../../components/AnalyzeReturn"
     import SymbolSearch from "../../../components/SymbolSearch"
     import Header from '../../../components/Header'
+    import FuturisticTable from '../../../components/FuturisticTable'
 
 
-    import {resetInputs, getAnalyzedResults} from "../../../utils"
+    import {resetInputs, getAnalyzedResults} from "../../../utils/utils"
 
     const article = ({income_statement, balance_sheet, cash_flow, stock_info, price_info,}) => {
         const [analyzed, setAnalyzed] = useState(false);

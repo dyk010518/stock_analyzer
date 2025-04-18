@@ -1,5 +1,5 @@
 import stockStatsStyles from '../../styles/StockStats.module.css'
-import { getAverage } from '../../utils'
+import { getAverage } from '../../utils/utils'
 
 const Revenue = (props) => {
     const revenueGrowth = getRevenueNumbers(props.reports.IS)
