@@ -39,23 +39,28 @@ export default function Home() {
 
       {/* Foreground Content */}
       <main className="relative z-10 text-white flex flex-col items-center py-16">
-        <Header />
-        <SymbolSearch individual={false} />
+        <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+        >
+            <Header />
+        </motion.div>
         <motion.p 
           className="text-xl mb-10 text-center max-w-2xl"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1 }}
+          transition={{ delay: 1, duration: 1 }}
         >
           Real-time financial insights. Predict, analyze, and invest with confidence.
         </motion.p>
-        <motion.button 
-          className="bg-[#fff143] text-black px-6 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-yellow-500 transition"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 2 }}
         >
-          Try It Now
-        </motion.button>
+          <SymbolSearch individual={false} />
+        </motion.div>
       </main>
     </div>
   )

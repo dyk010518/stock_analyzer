@@ -8,9 +8,9 @@ const StockTitle = ({reports}) => {
     const difference_percent = Number(reports.PI["dp"]).toFixed(2)
 
     return (
-        <div className="flex justify-between items-center w-[40vw] mb-8 bg-gray-400 border-2 border-[#222] px-16 py-8 rounded-lg">
+        <div className="flex justify-between items-center w-[40vw] mb-8 bg-gray-100 px-16 py-8 rounded-lg shadow-[0_0_12px_2px_rgba(255,255,255,0.5)]">
             <div>
-                <h2>{name} ({symbol})</h2>
+                <p>{name} ({symbol})</p>
                 <p>{exchange} | Currency in {currency}</p>
             </div>
             <div>
