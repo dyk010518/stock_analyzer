@@ -2,7 +2,7 @@ const AnalyzeReturn = (props) => {
     return (
         <table className="w-[50vw]">
             <thead>
-                <tr className="bg-[#d5a82aff] text-white h-12">
+                <tr className="bg-[#fff143] text-white h-12">
                     <th></th>
                     <th>Low</th>
                     <th>Mid</th>

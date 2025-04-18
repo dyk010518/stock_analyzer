@@ -2,13 +2,17 @@ import Link from 'next/link'
 
 const Nav = () => {
     return (
-        <nav className="h-12 px-16 bg-[#333333] text-white flex justify-start items-center">
-            <ul className="flex flex-row justify-center items-center list-none space-x-8">
+        <nav className="absolute top-0 left-0 w-full h-16 px-16 bg-[#121212] text-white border-b-[0.5px] border-white z-10 flex justify-start items-center">
+            <ul className="flex flex-row items-center list-none space-x-8">
                 <li>
-                    <Link href='/'>Stock Analyzer</Link>
+                    <Link href='/'>
+                        Stock Analyzer
+                    </Link>
                 </li>
                 <li>
-                    <Link href='/guide'>Guide</Link>
+                    <Link href='/guide'>
+                        Guide
+                    </Link>
                 </li>
             </ul>
         </nav>
