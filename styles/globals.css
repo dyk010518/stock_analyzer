@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
@@ -26,4 +30,31 @@ input[type=number]::-webkit-outer-spin-button {
   display: flex;
   width: 60vw;
   justify-content: space-between;
+}
+
+@keyframes slide {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes slide-reverse {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-slide {
+  animation: slide 60s linear infinite;
+}
+
+.animate-slide-reverse {
+  animation: slide-reverse 60s linear infinite;
+}
+
+.font-ticker {
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 0.1em;
+}
+
+.glowing-text {
+  text-shadow: 0 0 5px rgba(255,255,255,0.3), 0 0 10px currentColor;
 }

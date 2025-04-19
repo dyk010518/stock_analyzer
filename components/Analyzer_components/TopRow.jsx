@@ -1,29 +1,35 @@
-import topStyles from '../../styles/TopRow.module.css'
-
-
 const TopRow = () => {
     return (
-        <thead>
-            <tr className={topStyles.row}>
-                <th className={topStyles.col}></th>
-                <th className={topStyles.col1}>Past Numbers</th>
-                <th className={topStyles.col1}>My 10-Year Assumptions</th>
+        <thead className="text-white">
+            <tr className="bg-white/10">
+                <th className="border-b border-white/20 w-1/4" rowSpan={2} />
+                <th className="py-2 text-xl font-semibold border-b border-white/20 text-primary-300 w-1/3" colSpan={3}>
+                    {"Past Numbers"}
+                </th>
+                <th className="py-2 text-xl font-semibold border-b border-white/20 text-primary-300" colSpan={3}>
+                    {"10-Year Assumptions"}
+                </th>
             </tr>
-            <tr className={topStyles.row}>
-                <th className={topStyles.col}></th>
-                <th className={topStyles.col}>
-                    <p2>1 year</p2>
-                    <p2>3 year</p2>
-                    <p2>5 year</p2>
-                </th>
-                <th className={topStyles.col}>
-                    <p2>Low</p2>
-                    <p2>Mid</p2>
-                    <p2>High</p2>
-                </th>
+            <tr className="bg-white/10">
+                {["1 year", "3 year", "5 year"].map((header, idx) => (
+                    <th
+                        key={`g1-${idx}`}
+                        className="py-2 px-4 text-md font-medium border-b border-white/15 text-white"
+                    >
+                        {header}
+                    </th>
+                ))}
+                {["Bear", "Base", "Bull"].map((header, idx) => (
+                    <th
+                        key={`g2-${idx}`}
+                        className="py-2 px-4 text-md font-medium border-b border-white/15 text-white"
+                    >
+                        {header}
+                    </th>
+                ))}
             </tr>
         </thead>
-    )
-}
+    );
+};
 
-export default TopRow
+export default TopRow;
