@@ -1,26 +1,49 @@
-import searchStyles from '../styles/SymbolSearch.module.css'
-import Link from 'next/link'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 const SymbolSearch = (props) => {
+    const [inputValue, setInputValue] = useState('')
     const router = useRouter()
 
-    const handleClick = (input) => {
-        /[a-zA-Z]/.test(input.value) && router.push(`/analysis/${input.value.toUpperCase()}`)
-        input.value = ""
+    const handleClick = () => {
+        if (/[a-zA-Z]/.test(inputValue)) {
+            router.push(`/analysis/${inputValue.toUpperCase()}`)
+        }
+        setInputValue('')
         if (props.individual) props.AnalysisOff()
     }
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleClick()
+        }
+    }
+
     return (
-        <div className={searchStyles.container}>
-            <input type='text' id="userInput" placeholder='Search Stock Symbol' className={searchStyles.search}></input>
-            {(typeof window !=='undefined' && document.getElementById("userInput")) && (document.getElementById("userInput").value = "")}
-            <button className={searchStyles.button} onClick={() => handleClick(document.getElementById("userInput"))}><img src="/search.png" className={searchStyles.glass}></img></button>
+        <div className="flex justify-center mb-8">
+            <input 
+                type="text"
+                id="userInput"
+                placeholder="Search Stock Symbol"
+                className="h-10 w-72 text-xl text-gray-700 pl-4 mr-2 rounded-full"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={handleKeyDown}
+            />
+            <button 
+                className="h-10 w-10 bg-gray-400 flex items-center justify-center rounded-full hover:bg-gray-500 duration-200"
+                onClick={handleClick}
+            >
+                <Image 
+                    src="/search.png" 
+                    alt="Search" 
+                    width={24}
+                    height={24}
+                />
+            </button>
         </div>
     )
 }
-
-
-
 
 export default SymbolSearch

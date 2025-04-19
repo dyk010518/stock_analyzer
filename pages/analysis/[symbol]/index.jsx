@@ -1,34 +1,30 @@
-import {server} from "../../../config"
-import Link from 'next/link'
-import { useRouter } from "next/router"
 import Meta from '../../../components/Meta'
-import StockAnalyzer from "../../../components/StockAnalyzer"
-import AnalyzeButton from '../../../components/AnalyzeButton'
+import StockAnalyzer from "../../../components/Analyzer_components/StockAnalyzer"
+import AnalyzeButton from '../../../components/Analyzer_components/AnalyzeButton'
 import StockTitle from "../../../components/StockTitle"
 import {useState} from 'react'
-import AnalyzeReturn from "../../../components/AnalyzeReturn"
+import AnalyzeReturn from "../../../components/Analyzer_components/AnalyzeReturn"
 import SymbolSearch from "../../../components/SymbolSearch"
-import {resetInputs, getAnalyzedResults} from "../../../utils"
+import Header from '../../../components/Header'
+import Link from 'next/link'
 
 
+import {resetInputs, getAnalyzedResults} from "../../../utils/utils"
 
-let earningVals, fcfVals
-
-
-const article = ({income_statement, balance_sheet, cash_flow, stock_info, price_info,}) => {
+const stockHome = ({income_statement, balance_sheet, cash_flow, stock_info, price_info,}) => {
     const [analyzed, setAnalyzed] = useState(false);
     const [earningVals, setEarningVals] = useState(false);
     const [fcfVals, setFcfVals] = useState(false);
 
     const handleClick = () => {
         const analysisResult = getAnalyzedResults(income_statement, balance_sheet)
-        setEarningVals(earningVals = analysisResult['earningsVals'])
-        setFcfVals(fcfVals = analysisResult['fcfVals'])
-        setAnalyzed(analyzed = true)
+        setEarningVals(analysisResult['earningsVals'])
+        setFcfVals(analysisResult['fcfVals'])
+        setAnalyzed(true)
     }
 
     const AnalysisOff = () => {
-        setAnalyzed(analyzed = false)
+        setAnalyzed(false)
         found && resetInputs()
     }
 
@@ -42,11 +38,12 @@ const article = ({income_statement, balance_sheet, cash_flow, stock_info, price_
 
     const found = income_statement.symbol ? true : false  
 
-    return <>
+    return <main className="bg-gray-900 min-h-screen flex flex-col items-center pt-24">
         <Meta />
+        <Header />
         <SymbolSearch AnalysisOff={AnalysisOff} individual={true}/>
 
-        <div class="info-container">
+        <div className="info-container">
             {found && <StockTitle reports={reports}/>}
             {found && <AnalyzeButton pressed={false} reports={reports} handleClick={handleClick}/>}
         </div>
@@ -59,7 +56,7 @@ const article = ({income_statement, balance_sheet, cash_flow, stock_info, price_
         )}
         {/* <Link href='/'>Go Back Home</Link> */}
         
-    </>
+    </main>
 }
 
 export const getServerSideProps = async (context) => {
@@ -89,4 +86,4 @@ export const getServerSideProps = async (context) => {
     }
 }
 
-export default article
+export default stockHome
