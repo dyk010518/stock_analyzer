@@ -13,6 +13,53 @@ export const resetInputs = () => {
     }
 }
 
+export const getAnalyzedResults = (IS, BS) => {
+    const numberOfQuarters = IS.quarterlyReports.length;
+  
+    const lastRevenue = numberOfQuarters >= 4
+      ? getAverage([
+          getQuarterlyRevenue(IS, 0),
+          getQuarterlyRevenue(IS, 1),
+          getQuarterlyRevenue(IS, 2),
+          getQuarterlyRevenue(IS, 3),
+        ]) * 4
+      : undefined;
+  
+    const shares = BS.quarterlyReports[0].commonStockSharesOutstanding !== "None"
+      ? Number(BS.quarterlyReports[0].commonStockSharesOutstanding)
+      : undefined;
+  
+    const getInputValue = (id, isPercent = false) => {
+      const val = Number(document.getElementById(id)?.value);
+      return isPercent ? val / 100 : val;
+    };
+
+    const growthRates = ["bear", "base", "bull"].map(key =>
+      getInputValue(`revenue_input_${key}`, true)
+    );
+    const profitMargins = ["bear", "base", "bull"].map(key =>
+      getInputValue(`profitMargin_input_${key}`, true)
+    );
+    const fcfMargins = ["bear", "base", "bull"].map(key =>
+      getInputValue(`FCFMargin_input_${key}`, true)
+    );
+    const peRatios = ["bear", "base", "bull"].map(key =>
+      getInputValue(`PE_input_${key}`)
+    );
+    const pfcfRatios = ["bear", "base", "bull"].map(key =>
+      getInputValue(`PFCF_input_${key}`)
+    );
+    const discountRates = ["bear", "base", "bull"].map(key =>
+      getInputValue(`discountRate_input_${key}`, true)
+    );
+  
+    const earningsVals = growthRates.map((growth, i) =>
+      getDiscountedVal(lastRevenue, shares, growth, profitMargins[i], peRatios[i], discountRates[i])
+    );
+    const fcfVals = growthRates.map((growth, i) =>
+      getDiscountedVal(lastRevenue, shares, growth, fcfMargins[i], pfcfRatios[i], discountRates[i])
+    );
+  
 export const getAnalyzedResults = (IS, BS, numYears) => {
     const number_of_quarters = IS.quarterlyReports.length
     const last_revenue = number_of_quarters >= 4 ? getAverage([getQuarterlyRevenue(IS, 0), getQuarterlyRevenue(IS, 1), getQuarterlyRevenue(IS, 2), getQuarterlyRevenue(IS, 3)])*4 : undefined
@@ -25,14 +72,10 @@ export const getAnalyzedResults = (IS, BS, numYears) => {
     const [discount_bear, discount_base, discount_bull] = [Number(document.getElementById("discountRate_input_bear").value)/100, Number(document.getElementById("discountRate_input_base").value)/100, Number(document.getElementById("discountRate_input_bull").value)/100] 
     
     return {
-        'earningsVals': [getDiscountedVal(last_revenue, shares, growth_bear, p_margin_bear, pe_bear, discount_bear, numYears),
-                         getDiscountedVal(last_revenue, shares, growth_base, p_margin_base, pe_base, discount_base, numYears),
-                         getDiscountedVal(last_revenue, shares, growth_bull, p_margin_bull, pe_bull, discount_bull, numYears)],
-        'fcfVals': [getDiscountedVal(last_revenue, shares, growth_bear, fcf_margin_bear, pfcf_bear, discount_bear, numYears), 
-                    getDiscountedVal(last_revenue, shares, growth_base, fcf_margin_base, pfcf_base, discount_base, numYears),
-                    getDiscountedVal(last_revenue, shares, growth_bull, fcf_margin_bull, pfcf_bull, discount_bull, numYears)],
-    }
-}
+      earningsVals,
+      fcfVals,
+    };
+  };
 
 export const getAverage = (input_array) => {
     let sum = 0
