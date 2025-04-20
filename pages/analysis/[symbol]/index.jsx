@@ -11,7 +11,7 @@ import Link from 'next/link'
 
 import {resetInputs, getAnalyzedResults} from "../../../utils/utils"
 
-const stockHome = ({income_statement, balance_sheet, cash_flow, stock_info, price_info,}) => {
+const stockHome = ({symbol, income_statement, balance_sheet, cash_flow, stock_info, price_info,}) => {
     const [analyzed, setAnalyzed] = useState(false);
     const [earningVals, setEarningVals] = useState(false);
     const [fcfVals, setFcfVals] = useState(false);
@@ -49,7 +49,14 @@ const stockHome = ({income_statement, balance_sheet, cash_flow, stock_info, pric
         </div>
         <br />
         {found && <StockAnalyzer reports={reports}/>}
-        {!found && <h2>We couldn't find the symbol you typed. Please try again with a different symbol</h2>}
+        {!found && (
+            <div className="mt-8 p-6 max-w-lg text-center bg-red-100/10 border border-red-400 text-red-300 rounded-2xl shadow-lg">
+                <h2 className="text-2xl font-semibold mb-2">Symbol Not Found</h2>
+                <p className="text-base">
+                We couldn't find the stock symbol {symbol} you entered. Please try again with a different one.
+                </p>
+            </div>
+        )}
         <br />
         {analyzed && (
             <AnalyzeReturn earningVals={earningVals} fcfVals={fcfVals}/>
@@ -60,23 +67,25 @@ const stockHome = ({income_statement, balance_sheet, cash_flow, stock_info, pric
 }
 
 export const getServerSideProps = async (context) => {
-    const res1 = await fetch(`https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=${context.params.symbol}&apikey=${process.env.ALPHA_API_KEY}`)
+    const symbol = context.params.symbol
+    const res1 = await fetch(`https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=${symbol}&apikey=${process.env.ALPHA_API_KEY}`)
     const income_statement = await res1.json()
 
-    const res2 = await fetch(`https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=${context.params.symbol}&apikey=${process.env.ALPHA_API_KEY}`)
+    const res2 = await fetch(`https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=${symbol}&apikey=${process.env.ALPHA_API_KEY}`)
     const balance_sheet = await res2.json()
 
-    const res3 = await fetch(`https://www.alphavantage.co/query?function=CASH_FLOW&symbol=${context.params.symbol}&apikey=${process.env.ALPHA_API_KEY}`)
+    const res3 = await fetch(`https://www.alphavantage.co/query?function=CASH_FLOW&symbol=${symbol}&apikey=${process.env.ALPHA_API_KEY}`)
     const cash_flow = await res3.json()
 
-    const res5 = await fetch(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=${context.params.symbol}&apikey=${process.env.ALPHA_API_KEY}`)
+    const res5 = await fetch(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${process.env.ALPHA_API_KEY}`)
     const stock_info = await res5.json()
 
-    const res6 = await fetch(`https://finnhub.io/api/v1/quote?symbol=${context.params.symbol}&token=${process.env.FINNHUB_TOKEN}`)
+    const res6 = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${process.env.FINNHUB_TOKEN}`)
     const price_info = await res6.json()
 
     return {
         props: {
+            symbol,
             income_statement, 
             balance_sheet,
             cash_flow,
