@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import Image from 'next/image'
 
 const SymbolSearch = (props) => {
@@ -10,7 +11,7 @@ const SymbolSearch = (props) => {
         if (/[a-zA-Z]/.test(inputValue)) {
             router.push(`/analysis/${inputValue.toUpperCase()}`)
         }
-        setInputValue('')
+        setInputValue(inputValue.toUpperCase())
         if (props.individual) props.AnalysisOff()
     }
 
@@ -19,6 +20,10 @@ const SymbolSearch = (props) => {
             handleClick()
         }
     }
+
+    useEffect(() => {
+        setInputValue('');
+      }, [router.query.symbol]);
 
     return (
         <div className="flex justify-center mb-8">
