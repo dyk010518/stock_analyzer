@@ -1,12 +1,11 @@
 import Meta from '../../../components/Meta'
-import StockAnalyzer from "../../../components/Analyzer_components/StockAnalyzer"
+import StockAnalyzerTable from "../../../components/Analyzer_components/StockAnalyzerTable"
 import AnalyzeButton from '../../../components/Analyzer_components/AnalyzeButton'
 import StockTitle from "../../../components/StockTitle"
 import {useState} from 'react'
 import AnalyzeReturn from "../../../components/Analyzer_components/AnalyzeReturn"
 import SymbolSearch from "../../../components/SymbolSearch"
 import Header from '../../../components/Header'
-import Link from 'next/link'
 
 
 import {resetInputs, getAnalyzedResults} from "../../../utils/utils"
@@ -15,9 +14,10 @@ const stockHome = ({symbol, income_statement, balance_sheet, cash_flow, stock_in
     const [analyzed, setAnalyzed] = useState(false);
     const [earningVals, setEarningVals] = useState(false);
     const [fcfVals, setFcfVals] = useState(false);
+    const [numYears, setNumYears] = useState(5);
 
     const handleClick = () => {
-        const analysisResult = getAnalyzedResults(income_statement, balance_sheet)
+        const analysisResult = getAnalyzedResults(income_statement, balance_sheet, numYears)
         setEarningVals(analysisResult['earningsVals'])
         setFcfVals(analysisResult['fcfVals'])
         setAnalyzed(true)
@@ -48,7 +48,7 @@ const stockHome = ({symbol, income_statement, balance_sheet, cash_flow, stock_in
             {found && <AnalyzeButton pressed={false} reports={reports} handleClick={handleClick}/>}
         </div>
         <br />
-        {found && <StockAnalyzer reports={reports}/>}
+        {found && <StockAnalyzerTable reports={reports} numYears={numYears} setNumYears={setNumYears}/>}
         {!found && (
             <div className="mt-8 p-6 max-w-lg text-center bg-red-100/10 border border-red-400 text-red-300 rounded-2xl shadow-lg">
                 <h2 className="text-2xl font-semibold mb-2">Symbol Not Found</h2>

@@ -13,7 +13,7 @@ export const resetInputs = () => {
     }
 }
 
-export const getAnalyzedResults = (IS, BS) => {
+export const getAnalyzedResults = (IS, BS, numYears) => {
     const number_of_quarters = IS.quarterlyReports.length
     const last_revenue = number_of_quarters >= 4 ? getAverage([getQuarterlyRevenue(IS, 0), getQuarterlyRevenue(IS, 1), getQuarterlyRevenue(IS, 2), getQuarterlyRevenue(IS, 3)])*4 : undefined
     const shares = BS.quarterlyReports[0].commonStockSharesOutstanding != "None" ? Number(BS.quarterlyReports[0].commonStockSharesOutstanding) : undefined
@@ -25,12 +25,12 @@ export const getAnalyzedResults = (IS, BS) => {
     const [discount_bear, discount_base, discount_bull] = [Number(document.getElementById("discountRate_input_bear").value)/100, Number(document.getElementById("discountRate_input_base").value)/100, Number(document.getElementById("discountRate_input_bull").value)/100] 
     
     return {
-        'earningsVals': [getDiscountedVal(last_revenue, shares, growth_bear, p_margin_bear, pe_bear, discount_bear), 
-                         getDiscountedVal(last_revenue, shares, growth_base, p_margin_base, pe_base, discount_base), 
-                         getDiscountedVal(last_revenue, shares, growth_bull, p_margin_bull, pe_bull, discount_bull)],
-        'fcfVals': [getDiscountedVal(last_revenue, shares, growth_bear, fcf_margin_bear, pfcf_bear, discount_bear), 
-                    getDiscountedVal(last_revenue, shares, growth_base, fcf_margin_base, pfcf_base, discount_base),
-                    getDiscountedVal(last_revenue, shares, growth_bull, fcf_margin_bull, pfcf_bull, discount_bull)],
+        'earningsVals': [getDiscountedVal(last_revenue, shares, growth_bear, p_margin_bear, pe_bear, discount_bear, numYears),
+                         getDiscountedVal(last_revenue, shares, growth_base, p_margin_base, pe_base, discount_base, numYears),
+                         getDiscountedVal(last_revenue, shares, growth_bull, p_margin_bull, pe_bull, discount_bull, numYears)],
+        'fcfVals': [getDiscountedVal(last_revenue, shares, growth_bear, fcf_margin_bear, pfcf_bear, discount_bear, numYears), 
+                    getDiscountedVal(last_revenue, shares, growth_base, fcf_margin_base, pfcf_base, discount_base, numYears),
+                    getDiscountedVal(last_revenue, shares, growth_bull, fcf_margin_bull, pfcf_bull, discount_bull, numYears)],
     }
 }
 
@@ -44,15 +44,19 @@ export const getAverage = (input_array) => {
     return input_array.length != irrelevant ? sum/(input_array.length-irrelevant) : undefined
 }
 
-const getDiscountedVal = (revenue, shares, growth, margin, multiple, discount) => {
+const getDiscountedVal = (revenue, shares, growth, margin, multiple, discount, numYears) => {
     let rev = revenue
     let cumulative_val = 0
-    for(var time = 1; time <= 11; time++){
-        rev *= (1+growth)
-        let per_share = rev*margin/shares
-        if (time == 11) per_share *= multiple
-        cumulative_val += per_share/(1+discount)**time
+
+    for (var time = 1; time <= numYears; time++) {
+        rev *= (1 + growth)
+        let per_share = rev * margin / shares
+        cumulative_val += per_share / Math.pow(1 + discount, time)
     }
+    
+    let terminal_value = (rev * margin / shares) * multiple
+    cumulative_val += terminal_value / Math.pow(1 + discount, numYears)
+
     return cumulative_val.toFixed(2)
 }
 
