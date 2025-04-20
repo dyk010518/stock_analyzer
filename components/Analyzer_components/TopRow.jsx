@@ -1,4 +1,4 @@
-const TopRow = () => {
+const TopRow = ({ numYears, setNumYears }) => {
     return (
         <thead className="text-white">
             <tr className="bg-white/10">
@@ -7,7 +7,18 @@ const TopRow = () => {
                     {"Past Numbers"}
                 </th>
                 <th className="py-2 text-xl font-semibold border-b border-white/20 text-primary-300" colSpan={3}>
-                    {"10-Year Assumptions"}
+                    <div className="relative flex justify-center items-center">
+                        <span>{`${numYears}-Year Assumptions`}</span>
+                        <select
+                            className="absolute right-16 text-lg bg-gray-800 text-white border border-white/20 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-primary-300 hover:bg-gray-700 transition-all duration-150"
+                            value={numYears}
+                            onChange={(e) => setNumYears(Number(e.target.value))}
+                        >
+                            <option className="bg-gray-800 text-white" value={3}>3</option>
+                            <option className="bg-gray-800 text-white" value={5}>5</option>
+                            <option className="bg-gray-800 text-white" value={7}>7</option>
+                        </select>
+                    </div>
                 </th>
             </tr>
             <tr className="bg-white/10">
