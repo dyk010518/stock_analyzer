@@ -8,6 +8,23 @@ import {
   getFCFRatio
 } from "../../lib/finance";
 
+const StockAnalyzerTable = ({ reports, numYears, setNumYears }) => {
+  const data = buildMetricsData(reports);
+
+  return (
+    <div className="max-w-6xl mx-auto rounded-2xl overflow-hidden shadow-[0_4px_30px_rgba(255,255,255,0.1)] border border-white/20 bg-white/5 backdrop-blur-md">
+      <table className="w-full table-auto text-center">
+        <TopRow numYears={numYears} setNumYears={setNumYears}/>
+        <tbody>
+          {data.map((row, idx) => (
+            <NormalRow key={idx} row={row} rowIdx={idx} />
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
 const buildMetricsData = (reports) => {
   const revenueGrowth = getRevenueNumbers(reports.IS);
   const profitMargins = getProfitMargins(reports.IS);
@@ -53,23 +70,6 @@ const buildMetricsData = (reports) => {
       isPercentage: true
     }
   ];
-};
-
-const StockAnalyzerTable = ({ reports }) => {
-  const data = buildMetricsData(reports);
-
-  return (
-    <div className="max-w-6xl mx-auto rounded-2xl overflow-hidden shadow-[0_4px_30px_rgba(255,255,255,0.1)] border border-white/20 bg-white/5 backdrop-blur-md">
-      <table className="w-full table-auto text-center">
-        <TopRow />
-        <tbody>
-          {data.map((row, idx) => (
-            <NormalRow key={idx} row={row} rowIdx={idx} />
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
 };
 
 export default StockAnalyzerTable;
