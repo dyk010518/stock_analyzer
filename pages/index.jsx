@@ -50,14 +50,14 @@ export default function Home() {
           className="text-xl mb-6 text-center max-w-2xl"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
         >
           Real-time financial insights. Predict, analyze, and invest with confidence.
         </motion.p>
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 2 }}
+          transition={{ delay: 1, duration: 1 }}
         >
           <SymbolSearch individual={false} />
         </motion.div>
