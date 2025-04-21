@@ -57,36 +57,42 @@ const stockHome = ({reports}) => {
 }
 
 export const getServerSideProps = async (context) => {
-    const symbol = context.params.symbol
-    const res1 = await fetch(`https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=${symbol}&apikey=${process.env.ALPHA_API_KEY}`)
-    const income_statement = await res1.json()
+    const symbol = context.params.symbol;
+    const ALPHA_KEY = process.env.ALPHA_API_KEY;
+    const FINNHUB_KEY = process.env.FINNHUB_TOKEN;
 
-    const res2 = await fetch(`https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=${symbol}&apikey=${process.env.ALPHA_API_KEY}`)
-    const balance_sheet = await res2.json()
+    const urls = [
+        `https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=${symbol}&apikey=${ALPHA_KEY}`,
+        `https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=${symbol}&apikey=${ALPHA_KEY}`,
+        `https://www.alphavantage.co/query?function=CASH_FLOW&symbol=${symbol}&apikey=${ALPHA_KEY}`,
+        `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${ALPHA_KEY}`,
+        `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`
+    ];
 
-    const res3 = await fetch(`https://www.alphavantage.co/query?function=CASH_FLOW&symbol=${symbol}&apikey=${process.env.ALPHA_API_KEY}`)
-    const cash_flow = await res3.json()
-
-    const res5 = await fetch(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${process.env.ALPHA_API_KEY}`)
-    const stock_info = await res5.json()
-
-    const res6 = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${process.env.FINNHUB_TOKEN}`)
-    const price_info = await res6.json()
+    const [
+        income_statement,
+        balance_sheet,
+        cash_flow,
+        stock_info,
+        price_info
+    ] = await Promise.all(
+        urls.map(url => fetch(url).then(res => res.json()))
+    );
 
     const reports = await addCurrencyConversion({
-        symbol: symbol,
+        symbol,
         IS: income_statement,
         BS: balance_sheet,
         CF: cash_flow,
         SI: stock_info,
         PI: price_info,
-    })
+    });
 
     return {
         props: {
             reports
         }
-    }
-}
+    };
+};
 
 export default stockHome
