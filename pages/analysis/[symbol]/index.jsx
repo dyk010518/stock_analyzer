@@ -6,18 +6,16 @@ import {useState} from 'react'
 import AnalyzeReturn from "../../../components/Analyzer_components/AnalyzeReturn"
 import SymbolSearch from "../../../components/SymbolSearch"
 import Header from '../../../components/Header'
+import {resetInputs, getAnalyzedResults, addCurrencyConversion} from "../../../utils/utils"
 
-
-import {resetInputs, getAnalyzedResults} from "../../../utils/utils"
-
-const stockHome = ({symbol, income_statement, balance_sheet, cash_flow, stock_info, price_info,}) => {
+const stockHome = ({reports}) => {
     const [analyzed, setAnalyzed] = useState(false);
     const [earningVals, setEarningVals] = useState(false);
     const [fcfVals, setFcfVals] = useState(false);
     const [numYears, setNumYears] = useState(5);
 
     const handleClick = () => {
-        const analysisResult = getAnalyzedResults(income_statement, balance_sheet, numYears)
+        const analysisResult = getAnalyzedResults(reports, numYears)
         setEarningVals(analysisResult['earningsVals'])
         setFcfVals(analysisResult['fcfVals'])
         setAnalyzed(true)
@@ -28,15 +26,7 @@ const stockHome = ({symbol, income_statement, balance_sheet, cash_flow, stock_in
         found && resetInputs()
     }
 
-    const reports = {
-        IS: income_statement,
-        BS: balance_sheet,
-        CF: cash_flow,
-        SI: stock_info,
-        PI: price_info,
-    }
-
-    const found = income_statement.symbol ? true : false  
+    const found = reports.IS.symbol ? true : false  
 
     return <main className="bg-gray-900 min-h-screen flex flex-col items-center pt-24">
         <Meta />
@@ -53,7 +43,7 @@ const stockHome = ({symbol, income_statement, balance_sheet, cash_flow, stock_in
             <div className="mt-8 p-6 max-w-lg text-center bg-red-100/10 border border-red-400 text-red-300 rounded-2xl shadow-lg">
                 <h2 className="text-2xl font-semibold mb-2">Symbol Not Found</h2>
                 <p className="text-base">
-                We couldn't find the stock symbol {symbol} you entered. Please try again with a different one.
+                We couldn't find the stock symbol {reports.symbol} you entered. Please try again with a different one.
                 </p>
             </div>
         )}
@@ -83,14 +73,18 @@ export const getServerSideProps = async (context) => {
     const res6 = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${process.env.FINNHUB_TOKEN}`)
     const price_info = await res6.json()
 
+    const reports = await addCurrencyConversion({
+        symbol: symbol,
+        IS: income_statement,
+        BS: balance_sheet,
+        CF: cash_flow,
+        SI: stock_info,
+        PI: price_info,
+    })
+
     return {
         props: {
-            symbol,
-            income_statement, 
-            balance_sheet,
-            cash_flow,
-            stock_info,
-            price_info,
+            reports
         }
     }
 }

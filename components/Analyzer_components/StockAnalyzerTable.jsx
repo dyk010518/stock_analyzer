@@ -26,11 +26,11 @@ const StockAnalyzerTable = ({ reports, numYears, setNumYears }) => {
 };
 
 const buildMetricsData = (reports) => {
-  const revenueGrowth = getRevenueNumbers(reports.IS);
+  const revenueGrowth = getRevenueNumbers(reports.IS, reports.currencyConversion);
   const profitMargins = getProfitMargins(reports.IS);
-  const FCFMargins = getFCFMargins(reports.IS, reports.CF);
-  const PERatio = getPERatio(reports.IS, reports.BS, reports.PI);
-  const FCFRatio = getFCFRatio(reports.CF, reports.BS, reports.PI);
+  const FCFMargins = getFCFMargins(reports.IS, reports.CF, reports.currencyConversion);
+  const PERatio = getPERatio(reports.IS, reports.BS, reports.PI, reports.currencyConversion);
+  const FCFRatio = getFCFRatio(reports.CF, reports.BS, reports.PI, reports.currencyConversion);
 
   return [
     {
