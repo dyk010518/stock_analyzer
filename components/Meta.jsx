@@ -1,7 +1,11 @@
 import Head from 'next/head'
 import prefix from '../config/prefix'
 
-const Meta = ({title, keywords, description}) => {
+const Meta = ({
+    title = 'Stock Analyzer',
+    keywords = 'stocks, stock analyzer, fundamental, investing, portfolio, DCF',
+    description = 'Analyze and price different stocks based on your assumptions',
+}) => {
     return (
         <Head>
             <meta name='viewport' content='width=device-width, initial-scale=1' />
@@ -12,12 +16,6 @@ const Meta = ({title, keywords, description}) => {
             <title>{title}</title>
         </Head> 
     )
-}
-
-Meta.defaultProps = {
-    title: 'Stock Analyzer',
-    keywords: 'stocks, stock analyzer, fundamental, investing, portfolio, DCF',
-    desctiption: 'Analyze and price different stocks based on your assumptions',
 }
 
 export default Meta
