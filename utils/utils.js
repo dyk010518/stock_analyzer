@@ -13,8 +13,8 @@ export const resetInputs = () => {
     }
 }
 
-export const getAnalyzedResults = (IS, BS) => {
-    const numberOfQuarters = IS.quarterlyReports.length;
+export const getAnalyzedResults = (reports, numYears) => {
+    const numberOfQuarters = reports.IS.quarterlyReports.length;
   
     const lastRevenue = numberOfQuarters >= 4
       ? getAverage([
@@ -25,8 +25,8 @@ export const getAnalyzedResults = (IS, BS) => {
         ]) * 4
       : undefined;
   
-    const shares = BS.quarterlyReports[0].commonStockSharesOutstanding !== "None"
-      ? Number(BS.quarterlyReports[0].commonStockSharesOutstanding)
+    const shares = reports.BS.quarterlyReports[0].commonStockSharesOutstanding !== "None"
+      ? Number(reports.BS.quarterlyReports[0].commonStockSharesOutstanding)
       : undefined;
   
     const getInputValue = (id, isPercent = false) => {
@@ -54,28 +54,17 @@ export const getAnalyzedResults = (IS, BS) => {
     );
   
     const earningsVals = growthRates.map((growth, i) =>
-      getDiscountedVal(lastRevenue, shares, growth, profitMargins[i], peRatios[i], discountRates[i])
+      getDiscountedVal(lastRevenue, shares, growth, profitMargins[i], peRatios[i], discountRates[i], numYears)
     );
     const fcfVals = growthRates.map((growth, i) =>
-      getDiscountedVal(lastRevenue, shares, growth, fcfMargins[i], pfcfRatios[i], discountRates[i])
+      getDiscountedVal(lastRevenue, shares, growth, fcfMargins[i], pfcfRatios[i], discountRates[i], numYears)
     );
-  
-export const getAnalyzedResults = (IS, BS, numYears) => {
-    const number_of_quarters = IS.quarterlyReports.length
-    const last_revenue = number_of_quarters >= 4 ? getAverage([getQuarterlyRevenue(IS, 0), getQuarterlyRevenue(IS, 1), getQuarterlyRevenue(IS, 2), getQuarterlyRevenue(IS, 3)])*4 : undefined
-    const shares = BS.quarterlyReports[0].commonStockSharesOutstanding != "None" ? Number(BS.quarterlyReports[0].commonStockSharesOutstanding) : undefined
-    const [growth_bear, growth_base, growth_bull] = [Number(document.getElementById("revenue_input_bear").value)/100, Number(document.getElementById("revenue_input_base").value)/100, Number(document.getElementById("revenue_input_bull").value)/100] 
-    const [p_margin_bear, p_margin_base, p_margin_bull] = [Number(document.getElementById("profitMargin_input_bear").value)/100, Number(document.getElementById("profitMargin_input_base").value)/100, Number(document.getElementById("profitMargin_input_bull").value)/100] 
-    const [fcf_margin_bear, fcf_margin_base, fcf_margin_bull] = [Number(document.getElementById("FCFMargin_input_bear").value)/100, Number(document.getElementById("FCFMargin_input_base").value)/100, Number(document.getElementById("FCFMargin_input_bull").value)/100] 
-    const [pe_bear, pe_base, pe_bull] = [Number(document.getElementById("PE_input_bear").value), Number(document.getElementById("PE_input_base").value), Number(document.getElementById("PE_input_bull").value)] 
-    const [pfcf_bear, pfcf_base, pfcf_bull] = [Number(document.getElementById("PFCF_input_bear").value), Number(document.getElementById("PFCF_input_base").value), Number(document.getElementById("PFCF_input_bull").value)] 
-    const [discount_bear, discount_base, discount_bull] = [Number(document.getElementById("discountRate_input_bear").value)/100, Number(document.getElementById("discountRate_input_base").value)/100, Number(document.getElementById("discountRate_input_bull").value)/100] 
-    
+
     return {
       earningsVals,
       fcfVals,
     };
-  };
+}
 
 export const getAverage = (input_array) => {
     let sum = 0
@@ -103,6 +92,23 @@ const getDiscountedVal = (revenue, shares, growth, margin, multiple, discount, n
     return cumulative_val.toFixed(2)
 }
 
-const getQuarterlyRevenue = (IS, quarter) => {
-    return IS.quarterlyReports[quarter].totalRevenue != "None" ? Number(IS.quarterlyReports[quarter].totalRevenue) : undefined
+export const addCurrencyConversion = async (reports) => {
+    // if the symbol doesn't exist, return reports
+    if (!reports.IS.symbol) {
+        return reports
+    }
+
+    let currencyConversion = 1
+    const reportCurrency = reports.IS.quarterlyReports[0].reportedCurrency
+    if (!reportCurrency) return reports;
+
+    if (reportCurrency !== "USD") {
+        const res = await fetch(
+            `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${reportCurrency}&to_currency=USD&apikey=${process.env.ALPHA_API_KEY}`
+        )
+        const response = await res.json()
+        currencyConversion = Number(response['Realtime Currency Exchange Rate']['5. Exchange Rate'])
+    }
+    reports.currencyConversion = currencyConversion
+    return reports
 }
