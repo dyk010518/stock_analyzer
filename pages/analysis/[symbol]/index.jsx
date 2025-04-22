@@ -33,7 +33,7 @@ const stockHome = ({reports}) => {
         <Header />
         <SymbolSearch AnalysisOff={AnalysisOff} individual={true}/>
 
-        <div className="info-container">
+        <div className="flex flex-col md:flex-row w-[80vw] justify-center">
             {found && <StockTitle reports={reports}/>}
             {found && <AnalyzeButton pressed={false} reports={reports} handleClick={handleClick}/>}
         </div>
