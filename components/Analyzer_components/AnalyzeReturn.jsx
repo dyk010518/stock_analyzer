@@ -11,7 +11,7 @@ const AnalyzeReturn = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr className="text-white h-8 font-medium text-md border-b border-white/10">
+                    <tr className="text-white h-8 font-medium text-base border-b border-white/10">
                         <th className="w-1/2 py-2 px-6 font-bold">
                             <p1>Multiples Valuation</p1>
                         </th>
@@ -31,7 +31,7 @@ const AnalyzeReturn = (props) => {
                             </p>
                         </th>
                     </tr>
-                    <tr className="text-white h-8 font-medium text-md border-b border-white/10">
+                    <tr className="text-white h-8 font-medium text-base border-b border-white/10">
                         <th className="w-1/2 py-2 px-6 font-bold">
                             <p1>DCF Valuation</p1>
                         </th>
