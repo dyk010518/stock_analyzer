@@ -13,15 +13,21 @@ export const resetInputs = () => {
     }
 }
 
+// Quarterly revenue function
+export const getQuarterlyRevenue = (IS, quarter, cc) => {
+  const revenue = IS.quarterlyReports[quarter].totalRevenue;
+  return revenue !== "None" ? Number(revenue)*cc : undefined;
+}
+
 export const getAnalyzedResults = (reports, numYears) => {
     const numberOfQuarters = reports.IS.quarterlyReports.length;
   
     const lastRevenue = numberOfQuarters >= 4
       ? getAverage([
-          getQuarterlyRevenue(IS, 0),
-          getQuarterlyRevenue(IS, 1),
-          getQuarterlyRevenue(IS, 2),
-          getQuarterlyRevenue(IS, 3),
+          getQuarterlyRevenue(reports.IS, 0, reports.currencyConversion),
+          getQuarterlyRevenue(reports.IS, 1, reports.currencyConversion),
+          getQuarterlyRevenue(reports.IS, 2, reports.currencyConversion),
+          getQuarterlyRevenue(reports.IS, 3, reports.currencyConversion),
         ]) * 4
       : undefined;
   
