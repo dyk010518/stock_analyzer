@@ -9,7 +9,7 @@ function NormalRow({ row, rowIdx }) {
                     key={`r${rowIdx}-g1-${idx}`}
                     className="py-2 px-2 lg:px-6 text-white border-b border-white/10 text-base"
                 >
-                    {val} {(row.isPercentage && val != "-") && <span>%</span>}
+                    {val}{(row.isPercentage && val != "-") && <span>%</span>}
                 </td>
             ))}
             {(row.inputIds ?? []).map((val, idx) => (
