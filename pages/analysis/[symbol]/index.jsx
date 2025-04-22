@@ -37,7 +37,6 @@ const stockHome = ({reports}) => {
             {found && <StockTitle reports={reports}/>}
             {found && <AnalyzeButton pressed={false} reports={reports} handleClick={handleClick}/>}
         </div>
-        <br />
         {found && <StockAnalyzerTable reports={reports} numYears={numYears} setNumYears={setNumYears}/>}
         {!found && (
             <div className="mt-8 p-6 max-w-lg text-center bg-red-100/10 border border-red-400 text-red-300 rounded-2xl shadow-lg">
