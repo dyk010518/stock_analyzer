@@ -1,4 +1,4 @@
-const AnalyzeReturn = (props) => {
+const AnalysisResult = (props) => {
     return (
         <div className="max-w-6xl mx-auto rounded-2xl overflow-hidden shadow-[0_4px_30px_rgba(255,255,255,0.1)] border border-white/20 bg-white/5 backdrop-blur-md mb-16">
             <table className="w-[80vw] md:w-[50vw]">
@@ -59,4 +59,4 @@ const AnalyzeReturn = (props) => {
 
 
 
-export default AnalyzeReturn
+export default AnalysisResult

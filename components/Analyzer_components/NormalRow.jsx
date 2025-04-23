@@ -1,4 +1,4 @@
-function NormalRow({ row, rowIdx }) {
+function NormalRow({ row, rowIdx, inputValues, handleInputChange }) {
     return (
         <tr key={rowIdx} className="transition duration-200">
             <td className="py-2 px-6 text-white border-b border-white/10 font-bold text-base text-primary-300">
@@ -12,7 +12,7 @@ function NormalRow({ row, rowIdx }) {
                     {val}{(row.isPercentage && val != "-") && <span>%</span>}
                 </td>
             ))}
-            {(row.inputIds ?? []).map((val, idx) => (
+            {(row.inputIds ?? []).map((id, idx) => (
                 <td
                     key={`r${rowIdx}-g2-${idx}`}
                     className="py-2 px-2 lg:px-6 text-white border-b border-white/10 text-base"
@@ -21,8 +21,10 @@ function NormalRow({ row, rowIdx }) {
                         <div className="relative">
                             <input
                                 type="number"
-                                id={val}
-                                name="quantity"
+                                id={id}
+                                name={id}
+                                value={inputValues[id] || ""}
+                                onChange={(e) => handleInputChange(id, e.target.value)}
                                 className="w-full h-8 px-6 py-2 bg-transparent border border-white/20 rounded-md text-sm lg:text-base text-white text-center focus:outline-none focus:ring-2 focus:ring-primary-300"
                             />
                             {row.isPercentage && (

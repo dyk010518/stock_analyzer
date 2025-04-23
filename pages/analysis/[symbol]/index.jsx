@@ -3,7 +3,7 @@ import StockAnalyzerTable from "../../../components/Analyzer_components/StockAna
 import AnalyzeButton from '../../../components/Analyzer_components/AnalyzeButton'
 import StockTitle from "../../../components/StockTitle"
 import {useState} from 'react'
-import AnalyzeReturn from "../../../components/Analyzer_components/AnalyzeReturn"
+import AnalysisResult from "../../../components/Analyzer_components/AnalysisResult"
 import SymbolSearch from "../../../components/SymbolSearch"
 import Header from '../../../components/Header'
 import {resetInputs, getAnalyzedResults, addCurrencyConversion} from "../../../utils/utils"
@@ -48,7 +48,7 @@ const stockHome = ({reports}) => {
         )}
         <br />
         {analyzed && (
-            <AnalyzeReturn earningVals={earningVals} fcfVals={fcfVals}/>
+            <AnalysisResult earningVals={earningVals} fcfVals={fcfVals}/>
         )}
         {/* <Link href='/'>Go Back Home</Link> */}
         
