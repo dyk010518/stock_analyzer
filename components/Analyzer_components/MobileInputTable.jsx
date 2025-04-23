@@ -42,7 +42,6 @@ const MobileInputTable = ({ inputOnlyRows, numYears, setNumYears, inputValues, h
                           onChange={(e) => handleInputChange(id, e.target.value)}
                           className="w-full h-8 px-2 py-2 sm:pr-4 bg-transparent border border-white/20 rounded-md text-sm text-white text-center focus:outline-none focus:ring-2 focus:ring-primary-300"
                         />
-                        {console.log(id)}
                         {row.isPercentage && (
                           <span className="hidden sm:block absolute right-2 top-1/2 transform -translate-y-1/2 text-white text-base pointer-events-none">
                             %

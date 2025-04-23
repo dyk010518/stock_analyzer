@@ -109,11 +109,21 @@ export const addCurrencyConversion = async (reports) => {
     if (!reportCurrency) return reports;
 
     if (reportCurrency !== "USD") {
+      try {
         const res = await fetch(
-            `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${reportCurrency}&to_currency=USD&apikey=${process.env.ALPHA_API_KEY}`
-        )
-        const response = await res.json()
-        currencyConversion = Number(response['Realtime Currency Exchange Rate']['5. Exchange Rate'])
+          `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${reportCurrency}&to_currency=USD&apikey=${process.env.ALPHA_API_KEY}`
+        );
+    
+        const response = await res.json();
+        const rate = response?.['Realtime Currency Exchange Rate']?.['5. Exchange Rate'];
+    
+        currencyConversion = Number(rate);
+        if (isNaN(currencyConversion)) {
+          console.warn("Exchange rate is NaN, defaulting to 1");
+        }
+      } catch (error) {
+        console.error("Failed to fetch exchange rate:", error);
+      }
     }
     reports.currencyConversion = currencyConversion
     return reports
