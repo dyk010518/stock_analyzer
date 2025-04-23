@@ -47,7 +47,7 @@ export default function Home() {
             <Header />
         </motion.div>
         <motion.p 
-          className="text-xl mb-6 text-center max-w-2xl"
+          className="text-xl mb-6 mx-16 text-center max-w-2xl"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
