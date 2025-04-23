@@ -36,7 +36,10 @@ export const getAnalyzedResults = (reports, numYears) => {
       : undefined;
   
     const getInputValue = (id, isPercent = false) => {
-      const val = Number(document.getElementById(id)?.value);
+      let val = 0
+      if (document.getElementById(id)?.value != "") {
+        val = Number(document.getElementById(id)?.value);
+      }
       return isPercent ? val / 100 : val;
     };
 
@@ -83,6 +86,7 @@ export const getAverage = (input_array) => {
 }
 
 const getDiscountedVal = (revenue, shares, growth, margin, multiple, discount, numYears) => {
+    console.log(revenue, shares, growth, margin, multiple, discount, numYears)
     let rev = revenue
     let cumulative_val = 0
 

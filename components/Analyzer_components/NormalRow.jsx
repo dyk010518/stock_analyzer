@@ -24,6 +24,7 @@ function NormalRow({ row, rowIdx, inputValues, handleInputChange }) {
                                 id={id}
                                 name={id}
                                 value={inputValues[id] || ""}
+                                placeholder="0"
                                 onChange={(e) => handleInputChange(id, e.target.value)}
                                 className="w-full h-8 px-6 py-2 bg-transparent border border-white/20 rounded-md text-sm lg:text-base text-white text-center focus:outline-none focus:ring-2 focus:ring-primary-300"
                             />
