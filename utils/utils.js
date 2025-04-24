@@ -9,7 +9,7 @@ export const resetInputs = () => {
     ]
 
     for(var i = 0; i < element_ids.length; i++){
-        document.getElementById(element_ids[i]).value = document.getElementById(element_ids[i]).defaultValue
+        document.getElementById(element_ids[i]).value = ""
     }
 }
 
@@ -110,7 +110,6 @@ export const addCurrencyConversion = async (reports) => {
 
     let currencyConversion = 1
     const reportCurrency = reports.IS.quarterlyReports[0].reportedCurrency
-    if (!reportCurrency) return reports;
 
     if (reportCurrency !== "USD") {
       try {
@@ -124,6 +123,7 @@ export const addCurrencyConversion = async (reports) => {
         currencyConversion = Number(rate);
         if (isNaN(currencyConversion)) {
           console.warn("Exchange rate is NaN, defaulting to 1");
+          currencyConversion = 1
         }
       } catch (error) {
         console.error("Failed to fetch exchange rate:", error);

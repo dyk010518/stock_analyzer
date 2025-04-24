@@ -7,6 +7,7 @@ import AnalysisResult from "../../../components/Analyzer_components/AnalysisResu
 import SymbolSearch from "../../../components/SymbolSearch"
 import Header from '../../../components/Header'
 import {resetInputs, getAnalyzedResults, addCurrencyConversion} from "../../../utils/utils"
+import ResetButton from '../../../components/Analyzer_components/ResetButton'
 
 const stockHome = ({reports}) => {
     const [analyzed, setAnalyzed] = useState(false);
@@ -14,11 +15,16 @@ const stockHome = ({reports}) => {
     const [fcfVals, setFcfVals] = useState(false);
     const [numYears, setNumYears] = useState(5);
 
-    const handleClick = () => {
+    const handleAnalyzeClick = () => {
         const analysisResult = getAnalyzedResults(reports, numYears)
         setEarningVals(analysisResult['earningsVals'])
         setFcfVals(analysisResult['fcfVals'])
         setAnalyzed(true)
+    }
+
+    const handleResetClick = () => {
+        setAnalyzed(false)
+        resetInputs()
     }
 
     const AnalysisOff = () => {
@@ -35,7 +41,8 @@ const stockHome = ({reports}) => {
 
         <div className="flex flex-col md:flex-row w-[80vw] justify-center">
             {found && <StockTitle reports={reports}/>}
-            {found && <AnalyzeButton pressed={false} reports={reports} handleClick={handleClick}/>}
+            {found && <AnalyzeButton pressed={false} reports={reports} handleClick={handleAnalyzeClick}/>}
+            {found && <ResetButton pressed={false} reports={reports} handleClick={handleResetClick}/>}
         </div>
         {found && <StockAnalyzerTable reports={reports} numYears={numYears} setNumYears={setNumYears}/>}
         {!found && (
@@ -67,6 +74,7 @@ export const getServerSideProps = async (context) => {
         `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${ALPHA_KEY}`,
         `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`
     ];
+    console.log(urls)
 
     const [
         income_statement,
