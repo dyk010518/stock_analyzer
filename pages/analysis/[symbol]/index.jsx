@@ -57,8 +57,11 @@ const stockHome = ({reports}) => {
 
         <div className="flex flex-col md:flex-row w-[80vw] justify-center">
             {found && <StockTitle reports={reports}/>}
-            {found && <AnalyzeButton pressed={false} reports={reports} handleClick={handleAnalyzeClick}/>}
-            {found && <ResetButton pressed={false} reports={reports} handleClick={handleResetClick}/>}
+            <div className="flex flex-row md:flex-col justify-center items-center md:gap-y-4 gap-x-4 md:gap-x-0">
+                {found && <AnalyzeButton pressed={false} reports={reports} handleClick={handleAnalyzeClick}/>}
+                {found && <ResetButton pressed={false} reports={reports} handleClick={handleResetClick}/>}
+            </div>
+
         </div>
         {found && (
             <StockAnalyzerTable 
