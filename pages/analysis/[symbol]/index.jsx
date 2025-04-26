@@ -18,12 +18,13 @@ const StockHome = ({reports}) => {
   const [fcfVals, setFcfVals] = useState(false);
   const [numYears, setNumYears] = useState(5);
 
-  const data = buildMetricsData(reports);
+  const found = Boolean(reports?.IS?.symbol)
+
+  const data = buildMetricsData(reports, found);
   const allInputIds = data.flatMap(row => row.inputIds || []);
   const initialInputState = Object.fromEntries(allInputIds.map(id => [id, ""]))
   const [inputValues, setInputValues] = useState(initialInputState)
 
-  const found = Boolean(reports?.IS?.symbol)
 
   const resetInputs = () => {
     resetInputElements()

@@ -8,9 +8,12 @@ export const resetInputElements = () => {
         "discountRate_input_bear", "discountRate_input_base", "discountRate_input_bull"
     ]
 
-    for(var i = 0; i < element_ids.length; i++){
-        document.getElementById(element_ids[i]).value = ""
-    }
+    for (let i = 0; i < element_ids.length; i++) {
+      const el = document.getElementById(element_ids[i]);
+      if (el) {
+          el.value = "";
+      }
+  }
 }
 
 // Quarterly revenue function
