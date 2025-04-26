@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Image from 'next/image'
 
-const SymbolSearch = (props) => {
+const SymbolSearch = ( {resetAnalyzer, searched} ) => {
     const [inputValue, setInputValue] = useState('')
     const router = useRouter()
 
@@ -12,7 +12,7 @@ const SymbolSearch = (props) => {
             router.push(`/analysis/${inputValue.toUpperCase()}`)
         }
         setInputValue(inputValue.toUpperCase())
-        if (props.individual) props.AnalysisOff()
+        if (searched) resetAnalyzer()
     }
 
     const handleKeyDown = (e) => {

@@ -1,17 +1,8 @@
-import buildMetricsData from "../../lib/metrics";
 import DesktopTable from "./DesktopTable";
 import MobileDataTable from "./MobileDataTable";
 import MobileInputTable from "./MobileInputTable";
-import { useState } from "react";
 
-const StockAnalyzerTable = ({ reports, numYears, setNumYears }) => {
-  const data = buildMetricsData(reports);
-
-  // Init input state based on all inputIds
-  const allInputIds = data.flatMap(row => row.inputIds || []);
-  const [inputValues, setInputValues] = useState(() =>
-    Object.fromEntries(allInputIds.map(id => [id, ""]))
-  );
+const StockAnalyzerTable = ({ data, inputValues, setInputValues, numYears, setNumYears }) => {
 
   const handleInputChange = (id, value) => {
     setInputValues(prev => ({ ...prev, [id]: value }));

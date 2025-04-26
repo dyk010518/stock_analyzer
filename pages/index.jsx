@@ -59,7 +59,7 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 1 }}
         >
-          <SymbolSearch individual={false} />
+          <SymbolSearch searched={false} />
         </motion.div>
       </main>
     </div>

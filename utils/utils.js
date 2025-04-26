@@ -1,4 +1,4 @@
-export const resetInputs = () => {
+export const resetInputElements = () => {
     const element_ids = [
         "revenue_input_bear", "revenue_input_base", "revenue_input_bull", 
         "profitMargin_input_bear", "profitMargin_input_base", "profitMargin_input_bull",
@@ -9,7 +9,7 @@ export const resetInputs = () => {
     ]
 
     for(var i = 0; i < element_ids.length; i++){
-        document.getElementById(element_ids[i]).value = document.getElementById(element_ids[i]).defaultValue
+        document.getElementById(element_ids[i]).value = ""
     }
 }
 
@@ -31,9 +31,7 @@ export const getAnalyzedResults = (reports, numYears) => {
         ]) * 4
       : undefined;
   
-    const shares = reports.BS.quarterlyReports[0].commonStockSharesOutstanding !== "None"
-      ? Number(reports.BS.quarterlyReports[0].commonStockSharesOutstanding)
-      : undefined;
+    const shares = getShares(reports.BS);
   
     const getInputValue = (id, isPercent = false) => {
       let val = 0
@@ -86,7 +84,6 @@ export const getAverage = (input_array) => {
 }
 
 const getDiscountedVal = (revenue, shares, growth, margin, multiple, discount, numYears) => {
-    console.log(revenue, shares, growth, margin, multiple, discount, numYears)
     let rev = revenue
     let cumulative_val = 0
 
@@ -110,7 +107,6 @@ export const addCurrencyConversion = async (reports) => {
 
     let currencyConversion = 1
     const reportCurrency = reports.IS.quarterlyReports[0].reportedCurrency
-    if (!reportCurrency) return reports;
 
     if (reportCurrency !== "USD") {
       try {
@@ -124,6 +120,7 @@ export const addCurrencyConversion = async (reports) => {
         currencyConversion = Number(rate);
         if (isNaN(currencyConversion)) {
           console.warn("Exchange rate is NaN, defaulting to 1");
+          currencyConversion = 1
         }
       } catch (error) {
         console.error("Failed to fetch exchange rate:", error);
@@ -132,3 +129,13 @@ export const addCurrencyConversion = async (reports) => {
     reports.currencyConversion = currencyConversion
     return reports
 }
+
+export const getShares = (BS, maxLookBackQuarters = 4) => {
+  for (let i = 0; i <maxLookBackQuarters; i++) {
+      const report = BS.quarterlyReports[i];
+      if (report && report.commonStockSharesOutstanding !== "None") {
+          return Number(report.commonStockSharesOutstanding);
+      }
+  }
+  return undefined;
+};
