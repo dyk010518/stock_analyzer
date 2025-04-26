@@ -6,14 +6,24 @@ import {useState} from 'react'
 import AnalysisResult from "../../../components/Analyzer_components/AnalysisResult"
 import SymbolSearch from "../../../components/SymbolSearch"
 import Header from '../../../components/Header'
-import {resetInputs, getAnalyzedResults, addCurrencyConversion} from "../../../utils/utils"
+import {resetInputElements, getAnalyzedResults, addCurrencyConversion} from "../../../utils/utils"
 import ResetButton from '../../../components/Analyzer_components/ResetButton'
+import buildMetricsData from "../../../lib/metrics";
+
 
 const stockHome = ({reports}) => {
     const [analyzed, setAnalyzed] = useState(false);
     const [earningVals, setEarningVals] = useState(false);
     const [fcfVals, setFcfVals] = useState(false);
     const [numYears, setNumYears] = useState(5);
+
+    const data = buildMetricsData(reports);
+    
+    // Init input state based on all inputIds
+    const allInputIds = data.flatMap(row => row.inputIds || []);
+    const [inputValues, setInputValues] = useState(() =>
+        Object.fromEntries(allInputIds.map(id => [id, ""]))
+    );
 
     const handleAnalyzeClick = () => {
         const analysisResult = getAnalyzedResults(reports, numYears)
@@ -24,12 +34,18 @@ const stockHome = ({reports}) => {
 
     const handleResetClick = () => {
         setAnalyzed(false)
-        resetInputs()
+        resetInputElements()
+        setInputValues(() =>
+            Object.fromEntries(allInputIds.map(id => [id, ""]))
+        )
     }
 
     const AnalysisOff = () => {
         setAnalyzed(false)
-        found && resetInputs()
+        found && resetInputElements()
+        setInputValues(() =>
+            Object.fromEntries(allInputIds.map(id => [id, ""]))
+        )
     }
 
     const found = reports.IS.symbol ? true : false  
@@ -44,7 +60,15 @@ const stockHome = ({reports}) => {
             {found && <AnalyzeButton pressed={false} reports={reports} handleClick={handleAnalyzeClick}/>}
             {found && <ResetButton pressed={false} reports={reports} handleClick={handleResetClick}/>}
         </div>
-        {found && <StockAnalyzerTable reports={reports} numYears={numYears} setNumYears={setNumYears}/>}
+        {found && (
+            <StockAnalyzerTable 
+                data={data}
+                inputValues={inputValues}
+                setInputValues={setInputValues}
+                numYears={numYears}
+                setNumYears={setNumYears}
+            />)
+        }
         {!found && (
             <div className="mt-8 p-6 max-w-lg text-center bg-red-100/10 border border-red-400 text-red-300 rounded-2xl shadow-lg">
                 <h2 className="text-2xl font-semibold mb-2">Symbol Not Found</h2>
@@ -57,7 +81,6 @@ const stockHome = ({reports}) => {
         {analyzed && (
             <AnalysisResult earningVals={earningVals} fcfVals={fcfVals}/>
         )}
-        {/* <Link href='/'>Go Back Home</Link> */}
         
     </main>
 }
@@ -74,7 +97,6 @@ export const getServerSideProps = async (context) => {
         `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${ALPHA_KEY}`,
         `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`
     ];
-    console.log(urls)
 
     const [
         income_statement,

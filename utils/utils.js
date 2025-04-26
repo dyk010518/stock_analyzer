@@ -1,4 +1,4 @@
-export const resetInputs = () => {
+export const resetInputElements = () => {
     const element_ids = [
         "revenue_input_bear", "revenue_input_base", "revenue_input_bull", 
         "profitMargin_input_bear", "profitMargin_input_base", "profitMargin_input_bull",
@@ -86,7 +86,6 @@ export const getAverage = (input_array) => {
 }
 
 const getDiscountedVal = (revenue, shares, growth, margin, multiple, discount, numYears) => {
-    console.log(revenue, shares, growth, margin, multiple, discount, numYears)
     let rev = revenue
     let cumulative_val = 0
 
