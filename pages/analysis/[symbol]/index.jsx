@@ -1,130 +1,98 @@
 import Meta from '../../../components/Meta'
-import StockAnalyzerTable from "../../../components/Analyzer_components/StockAnalyzerTable"
-import AnalyzeButton from '../../../components/Analyzer_components/AnalyzeButton'
-import StockTitle from "../../../components/StockTitle"
-import {useState} from 'react'
-import AnalysisResult from "../../../components/Analyzer_components/AnalysisResult"
-import SymbolSearch from "../../../components/SymbolSearch"
 import Header from '../../../components/Header'
-import {resetInputElements, getAnalyzedResults, addCurrencyConversion} from "../../../utils/utils"
-import ResetButton from '../../../components/Analyzer_components/ResetButton'
-import buildMetricsData from "../../../lib/metrics";
+import SymbolSearch from '../../../components/SymbolSearch'
+import StockTitle from '../../../components/StockTitle'
+import Buttons from '../../../components/Analyzer_components/Buttons'
+import StockAnalyzerTable from "../../../components/Analyzer_components/StockAnalyzerTable"
+import AnalysisResult from "../../../components/Analyzer_components/AnalysisResult"
+
+import { useState } from 'react'
+import { resetInputElements, getAnalyzedResults } from "../../../utils/utils"
+import buildMetricsData from "../../../lib/metrics"
+import { getReportsForSymbol } from '../../../lib/getReports'
 
 
-const stockHome = ({reports}) => {
-    const [analyzed, setAnalyzed] = useState(false);
-    const [earningVals, setEarningVals] = useState(false);
-    const [fcfVals, setFcfVals] = useState(false);
-    const [numYears, setNumYears] = useState(5);
+const StockHome = ({reports}) => {
+  const [analyzed, setAnalyzed] = useState(false);
+  const [earningVals, setEarningVals] = useState(false);
+  const [fcfVals, setFcfVals] = useState(false);
+  const [numYears, setNumYears] = useState(5);
 
-    const data = buildMetricsData(reports);
-    
-    // Init input state based on all inputIds
-    const allInputIds = data.flatMap(row => row.inputIds || []);
-    const [inputValues, setInputValues] = useState(() =>
-        Object.fromEntries(allInputIds.map(id => [id, ""]))
-    );
+  const data = buildMetricsData(reports);
+  const allInputIds = data.flatMap(row => row.inputIds || []);
+  const initialInputState = Object.fromEntries(allInputIds.map(id => [id, ""]))
+  const [inputValues, setInputValues] = useState(initialInputState)
 
-    const handleAnalyzeClick = () => {
-        const analysisResult = getAnalyzedResults(reports, numYears)
-        setEarningVals(analysisResult['earningsVals'])
-        setFcfVals(analysisResult['fcfVals'])
-        setAnalyzed(true)
-    }
+  const found = Boolean(reports?.IS?.symbol)
 
-    const handleResetClick = () => {
-        setAnalyzed(false)
-        resetInputElements()
-        setInputValues(() =>
-            Object.fromEntries(allInputIds.map(id => [id, ""]))
-        )
-    }
+  const resetInputs = () => {
+    resetInputElements()
+    setInputValues(initialInputState)
+  }
 
-    const AnalysisOff = () => {
-        setAnalyzed(false)
-        found && resetInputElements()
-        setInputValues(() =>
-            Object.fromEntries(allInputIds.map(id => [id, ""]))
-        )
-    }
+  const handleAnalyzeClick = () => {
+    const analysisResult = getAnalyzedResults(reports, numYears)
+    setEarningVals(analysisResult['earningsVals'])
+    setFcfVals(analysisResult['fcfVals'])
+    setAnalyzed(true)
+  }
 
-    const found = reports.IS.symbol ? true : false  
+  const resetAnalyzer = () => {
+    setAnalyzed(false)
+    resetInputs()
+  }
 
-    return <main className="bg-gray-900 min-h-screen flex flex-col items-center pt-24">
-        <Meta />
-        <Header />
-        <SymbolSearch AnalysisOff={AnalysisOff} individual={true}/>
+  return (
+    <main className="bg-gray-900 min-h-screen flex flex-col items-center pt-24">
+      <Meta />
+      <Header />
+      <SymbolSearch resetAnalyzer={resetAnalyzer} searched={true}/>
 
-        <div className="flex flex-col md:flex-row w-[80vw] justify-center">
-            {found && <StockTitle reports={reports}/>}
-            <div className="flex flex-row md:flex-col justify-center items-center md:gap-y-4 gap-x-4 md:gap-x-0">
-                {found && <AnalyzeButton pressed={false} reports={reports} handleClick={handleAnalyzeClick}/>}
-                {found && <ResetButton pressed={false} reports={reports} handleClick={handleResetClick}/>}
-            </div>
-
-        </div>
+      <div className="flex flex-col md:flex-row w-[80vw] justify-center">
         {found && (
-            <StockAnalyzerTable 
-                data={data}
-                inputValues={inputValues}
-                setInputValues={setInputValues}
-                numYears={numYears}
-                setNumYears={setNumYears}
-            />)
-        }
-        {!found && (
-            <div className="mt-8 p-6 max-w-lg text-center bg-red-100/10 border border-red-400 text-red-300 rounded-2xl shadow-lg">
-                <h2 className="text-2xl font-semibold mb-2">Symbol Not Found</h2>
-                <p className="text-base">
-                We couldn't find the stock symbol {reports.symbol} you entered. Please try again with a different one.
-                </p>
-            </div>
+          <>
+            <StockTitle reports={reports} />
+            <Buttons handleAnalyzeClick={handleAnalyzeClick} handleResetClick={resetAnalyzer} />
+          </>
         )}
-        <br />
-        {analyzed && (
-            <AnalysisResult earningVals={earningVals} fcfVals={fcfVals}/>
-        )}
-        
+      </div>
+
+      {found ? (
+        <StockAnalyzerTable
+          data={data}
+          inputValues={inputValues}
+          setInputValues={setInputValues}
+          numYears={numYears}
+          setNumYears={setNumYears}
+        />
+      ) : (
+        <div className="mt-8 p-6 max-w-lg text-center bg-red-100/10 border border-red-400 text-red-300 rounded-2xl shadow-lg">
+          <h2 className="text-2xl font-semibold mb-2">Symbol Not Found</h2>
+          <p className="text-base">
+            We couldn't find the stock symbol {reports.symbol} you entered. Please try again with a different one.
+          </p>
+        </div>
+      )}
+
+      <br />
+
+      {analyzed && (
+        <AnalysisResult earningVals={earningVals} fcfVals={fcfVals} />
+      )}
+      
     </main>
+  )
 }
 
 export const getServerSideProps = async (context) => {
-    const symbol = context.params.symbol;
-    const ALPHA_KEY = process.env.ALPHA_API_KEY;
-    const FINNHUB_KEY = process.env.FINNHUB_TOKEN;
+  const symbol = context.params.symbol;
+  const reports = await getReportsForSymbol(symbol);
 
-    const urls = [
-        `https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=${symbol}&apikey=${ALPHA_KEY}`,
-        `https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=${symbol}&apikey=${ALPHA_KEY}`,
-        `https://www.alphavantage.co/query?function=CASH_FLOW&symbol=${symbol}&apikey=${ALPHA_KEY}`,
-        `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${symbol}&apikey=${ALPHA_KEY}`,
-        `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`
-    ];
-
-    const [
-        income_statement,
-        balance_sheet,
-        cash_flow,
-        stock_info,
-        price_info
-    ] = await Promise.all(
-        urls.map(url => fetch(url).then(res => res.json()))
-    );
-
-    const reports = await addCurrencyConversion({
-        symbol,
-        IS: income_statement,
-        BS: balance_sheet,
-        CF: cash_flow,
-        SI: stock_info,
-        PI: price_info,
-    });
-
-    return {
-        props: {
-            reports
-        }
-    };
+  return {
+    props: {
+      reports,
+    },
+  };
 };
 
-export default stockHome
+export default StockHome

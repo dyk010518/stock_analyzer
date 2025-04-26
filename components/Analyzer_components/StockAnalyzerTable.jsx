@@ -1,8 +1,6 @@
-import buildMetricsData from "../../lib/metrics";
 import DesktopTable from "./DesktopTable";
 import MobileDataTable from "./MobileDataTable";
 import MobileInputTable from "./MobileInputTable";
-import { useState } from "react";
 
 const StockAnalyzerTable = ({ data, inputValues, setInputValues, numYears, setNumYears }) => {
 

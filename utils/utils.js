@@ -31,9 +31,7 @@ export const getAnalyzedResults = (reports, numYears) => {
         ]) * 4
       : undefined;
   
-    const shares = reports.BS.quarterlyReports[0].commonStockSharesOutstanding !== "None"
-      ? Number(reports.BS.quarterlyReports[0].commonStockSharesOutstanding)
-      : undefined;
+    const shares = getShares(reports.BS);
   
     const getInputValue = (id, isPercent = false) => {
       let val = 0
@@ -131,3 +129,13 @@ export const addCurrencyConversion = async (reports) => {
     reports.currencyConversion = currencyConversion
     return reports
 }
+
+export const getShares = (BS, maxLookBackQuarters = 4) => {
+  for (let i = 0; i <maxLookBackQuarters; i++) {
+      const report = BS.quarterlyReports[i];
+      if (report && report.commonStockSharesOutstanding !== "None") {
+          return Number(report.commonStockSharesOutstanding);
+      }
+  }
+  return undefined;
+};
