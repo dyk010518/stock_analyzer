@@ -2,7 +2,7 @@ import DesktopTable from "./DesktopTable";
 import MobileDataTable from "./MobileDataTable";
 import MobileInputTable from "./MobileInputTable";
 
-const StockAnalyzerTable = ({ data, inputValues, setInputValues, numYears, setNumYears }) => {
+const StockAnalyzerTable = ({ data, fiscalDate, inputValues, setInputValues, numYears, setNumYears }) => {
 
   const handleInputChange = (id, value) => {
     setInputValues(prev => ({ ...prev, [id]: value }));
@@ -25,6 +25,7 @@ const StockAnalyzerTable = ({ data, inputValues, setInputValues, numYears, setNu
       <div className="hidden md:block">
         <DesktopTable
           data={data}
+          fiscalDate={fiscalDate}
           numYears={numYears}
           setNumYears={setNumYears}
           inputValues={inputValues}
@@ -32,8 +33,8 @@ const StockAnalyzerTable = ({ data, inputValues, setInputValues, numYears, setNu
         />
       </div>
 
-      <div className="block md:hidden space-y-8">
-        <MobileDataTable pastOnlyRows={pastOnlyRows}/>
+      <div className="block md:hidden">
+        <MobileDataTable pastOnlyRows={pastOnlyRows} fiscalDate={fiscalDate}/>
         <MobileInputTable
           inputOnlyRows={inputOnlyRows}
           numYears={numYears}

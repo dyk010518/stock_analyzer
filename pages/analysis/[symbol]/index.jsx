@@ -8,7 +8,7 @@ import AnalysisResult from "../../../components/Analyzer_components/AnalysisResu
 
 import { useState } from 'react'
 import { resetInputElements, getAnalyzedResults } from "../../../utils/utils"
-import buildMetricsData from "../../../lib/metrics"
+import { buildMetricsData, getLastFiscalDate } from "../../../lib/metrics"
 import { getReportsForSymbol } from '../../../lib/getReports'
 
 
@@ -59,13 +59,16 @@ const StockHome = ({reports}) => {
       </div>
 
       {found ? (
-        <StockAnalyzerTable
-          data={data}
-          inputValues={inputValues}
-          setInputValues={setInputValues}
-          numYears={numYears}
-          setNumYears={setNumYears}
-        />
+        <>
+          <StockAnalyzerTable
+            data={data}
+            fiscalDate={reports.IS.quarterlyReports[0].fiscalDateEnding}
+            inputValues={inputValues}
+            setInputValues={setInputValues}
+            numYears={numYears}
+            setNumYears={setNumYears}
+          />
+        </>
       ) : (
         <div className="mt-8 p-6 max-w-lg text-center bg-red-100/10 border border-red-400 text-red-300 rounded-2xl shadow-lg">
           <h2 className="text-2xl font-semibold mb-2">Symbol Not Found</h2>
