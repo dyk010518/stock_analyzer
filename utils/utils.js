@@ -1,3 +1,5 @@
+import yahooFinance from 'yahoo-finance2';
+
 export const resetInputElements = () => {
     const element_ids = [
         "revenue_input_bear", "revenue_input_base", "revenue_input_bull", 
@@ -141,4 +143,45 @@ export const getShares = (BS, maxLookBackQuarters = 4) => {
       }
   }
   return undefined;
+};
+
+
+export const getDailyReturnSmart = async (symbol, errorBound) => {
+  try {
+    const quote = await yahooFinance.quote(symbol);
+    const history = await yahooFinance.historical(symbol, {
+      period1: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+      interval: '1d'
+    });
+
+    if (!history.length) {
+      console.log(`No historical data for ${symbol}`);
+      return;
+    }
+
+    const lastClose = history[history.length - 1].close;
+    let prevClose;
+
+    if (Math.abs(lastClose - quote.regularMarketPrice) < errorBound) {
+      // last candle is today (updated post-market), so use previous candle as yesterday
+      console.log("Too close")
+      prevClose = history.length > 1 ? history[history.length - 2].close : null;
+    } else {
+      // last candle is yesterday, quote is today's live price
+      prevClose = lastClose;
+    }
+
+    console.log(prevClose)
+
+    if (prevClose == null) {
+      console.log(`Not enough data to calculate return for ${symbol}`);
+      return;
+    }
+
+    const dailyReturn = ((quote.regularMarketPrice - prevClose) / prevClose) * 100;
+
+    return dailyReturn;
+  } catch (err) {
+    console.error(`Error fetching ${symbol}:`, err);
+  }
 };
