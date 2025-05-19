@@ -29,13 +29,13 @@ const Nav = () => {
 
   return (
     <nav className="fixed top-0 left-0 w-full h-16 px-8 lg:px-16 bg-[#021222] bg-opacity-90 text-white border-b border-white z-20 flex justify-between items-center">
-      <div className="text-xl font-semibold tracking-wide">
-        <Link href="/" className="hover:text-primary-300 transition">
+      <div className="tracking-wide space-x-4 items-center">
+        <Link href="/" className="text-xl font-semibold hover:text-primary-300 transition">
           Stock Analyzer
         </Link>
       </div>
 
-      <div className={`absolute left-1/2 transform -translate-x-1/2 hidden md:flex gap-4 text-xs transition-opacity duration-500 ${indexData ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`absolute left-1/2 transform -translate-x-1/2 hidden lg:flex gap-4 text-xs transition-opacity duration-500 ${indexData ? 'opacity-100' : 'opacity-0'}`}>
         {[
           { name: 'S&P 500', value: indexData?.sp500 },
           { name: 'NASDAQ', value: indexData?.nasdaq },
@@ -51,7 +51,11 @@ const Nav = () => {
         ))}
       </div>
 
-      <ul className="flex flex-row items-center gap-4 md:gap-4">
+      <ul className="flex flex-row items-center">
+        <Link href="/give" className="text-lg font-normal hover:text-primary-300 transition mr-4 lg:mr-8">
+          Give
+        </Link>
+
         {session ? (
           <>
             <li className="hidden lg:block text-sm text-gray-300">

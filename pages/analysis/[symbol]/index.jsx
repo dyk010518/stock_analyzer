@@ -45,7 +45,6 @@ const StockHome = ({reports}) => {
 
   return (
     <main className="bg-gray-900 min-h-screen flex flex-col items-center pt-24">
-      <Meta />
       <Header />
       <SymbolSearch resetAnalyzer={resetAnalyzer} searched={true}/>
 

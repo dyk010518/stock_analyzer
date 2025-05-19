@@ -149,10 +149,10 @@ export const getShares = (BS, maxLookBackQuarters = 4) => {
 export const getDailyReturnSmart = async (symbol, errorBound) => {
   try {
     const quote = await yahooFinance.quote(symbol);
-    const history = await yahooFinance.historical(symbol, {
+    const history = (await yahooFinance.chart(symbol, {
       period1: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 1 week
       interval: '1d'
-    });
+    })).quotes;
 
     if (!history.length) {
       console.log(`No historical data for ${symbol}`);
