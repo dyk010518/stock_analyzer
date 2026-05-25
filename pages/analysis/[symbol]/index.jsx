@@ -1,4 +1,3 @@
-import Meta from '../../../components/Meta'
 import Header from '../../../components/Header'
 import SymbolSearch from '../../../components/SymbolSearch'
 import StockTitle from '../../../components/StockTitle'
