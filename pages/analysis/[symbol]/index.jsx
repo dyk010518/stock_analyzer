@@ -18,6 +18,7 @@ const StockHome = ({reports}) => {
   const [numYears, setNumYears] = useState(5);
 
   const found = Boolean(reports?.IS?.symbol)
+  const isRateLimited = reports?.IS?.Information?.includes("Please subscribe to any of the premium plans")
 
   const data = buildMetricsData(reports, found);
   const allInputIds = data.flatMap(row => row.inputIds || []);
@@ -68,6 +69,13 @@ const StockHome = ({reports}) => {
             setNumYears={setNumYears}
           />
         </>
+      ) : isRateLimited ? (
+        <div className="mt-8 p-6 max-w-lg text-center bg-amber-100/10 border border-amber-400 text-amber-300 rounded-2xl shadow-lg">
+          <h2 className="text-2xl font-semibold mb-2">Rate Limit Reached</h2>
+          <p className="text-base">
+            Sorry, the rate limit has been reached. Please try again tomorrow.
+          </p>
+        </div>
       ) : (
         <div className="mt-8 p-6 max-w-lg text-center bg-red-100/10 border border-red-400 text-red-300 rounded-2xl shadow-lg">
           <h2 className="text-2xl font-semibold mb-2">Symbol Not Found</h2>

@@ -1,8 +1,8 @@
-import { getDailyReturnSmart } from '../../utils/utils';
+import { getDailyReturnSmart } from '../../lib/getIndexReturnsServer';
 
 export default async function handler(req, res) {
-  const tickers = ['^GSPC', 'QQQ', '^DJI',]; // S&P 500, QQQ, Dow Jones
-  const errorBound = 5e-3
+  const tickers = ['^GSPC', 'QQQ', '^DJI']; // S&P 500, QQQ, Dow Jones
+  const errorBound = 5e-3;
   const returns = await Promise.all(
     tickers.map(symbol => getDailyReturnSmart(symbol, errorBound))
   );
