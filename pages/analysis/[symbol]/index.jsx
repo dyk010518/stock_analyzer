@@ -1,3 +1,4 @@
+import Meta from '../../../components/Meta'
 import Header from '../../../components/Header'
 import SymbolSearch from '../../../components/SymbolSearch'
 import StockTitle from '../../../components/StockTitle'
@@ -7,7 +8,7 @@ import AnalysisResult from "../../../components/Analyzer_components/AnalysisResu
 
 import { useState } from 'react'
 import { resetInputElements, getAnalyzedResults } from "../../../utils/utils"
-import { buildMetricsData, getLastFiscalDate } from "../../../lib/metrics"
+import { buildMetricsData } from "../../../lib/metrics"
 import { getReportsForSymbol } from '../../../lib/getReports'
 
 

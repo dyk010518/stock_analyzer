@@ -1,4 +1,3 @@
-import Meta from '../components/Meta'
 import {useState} from 'react'
 import Image from 'next/image';
 import Step1 from '../public/Step_1.gif'
