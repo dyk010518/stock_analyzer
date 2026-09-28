@@ -11,6 +11,13 @@ import { resetInputElements, getAnalyzedResults } from "../../../utils/utils"
 import { buildMetricsData } from "../../../lib/metrics"
 import { getReportsForSymbol } from '../../../lib/getReports'
 
+const DATA_ERRORS = {
+  not_found: ['Symbol Not Found', 'This symbol was not found in the SEC company directory. Try a US-listed company.'],
+  unsupported: ['Financial Statements Unavailable', 'This company does not have supported quarterly US-GAAP statements in US dollars. Funds, foreign filers, and companies using custom accounting tags may not be supported.'],
+  configuration: ['Financial Data Not Configured', 'The financial data connection has not been configured. Please contact the site owner.'],
+  rate_limited: ['Financial Data Temporarily Busy', 'The data provider is limiting requests. Please try again in a minute.'],
+  unavailable: ['Financial Data Unavailable', 'We could not reach the financial data provider. Please try again shortly.'],
+};
 
 const StockHome = ({reports}) => {
   const [analyzed, setAnalyzed] = useState(false);
@@ -19,7 +26,7 @@ const StockHome = ({reports}) => {
   const [numYears, setNumYears] = useState(5);
 
   const found = Boolean(reports?.IS?.symbol)
-  const isRateLimited = reports?.IS?.Information?.includes("Please subscribe to any of the premium plans")
+  const dataError = DATA_ERRORS[reports?.error] || DATA_ERRORS.unavailable
 
   const data = buildMetricsData(reports, found);
   const allInputIds = data.flatMap(row => row.inputIds || []);
@@ -61,6 +68,10 @@ const StockHome = ({reports}) => {
 
       {found ? (
         <>
+          <p className="mt-6 max-w-3xl px-4 text-center text-sm text-gray-300">
+            Financial statements: SEC EDGAR · USD · Missing or incomplete history is shown as “-”.
+            {reports.quoteStatus !== 'ok' && ' Quotes are unavailable. P/E and P/FCF require a current quote.'}
+          </p>
           <StockAnalyzerTable
             data={data}
             fiscalDate={reports.IS.quarterlyReports[0].fiscalDateEnding}
@@ -70,18 +81,11 @@ const StockHome = ({reports}) => {
             setNumYears={setNumYears}
           />
         </>
-      ) : isRateLimited ? (
-        <div className="mt-8 p-6 max-w-lg text-center bg-amber-100/10 border border-amber-400 text-amber-300 rounded-2xl shadow-lg">
-          <h2 className="text-2xl font-semibold mb-2">Rate Limit Reached</h2>
-          <p className="text-base">
-            Sorry, the rate limit has been reached. Please try again tomorrow.
-          </p>
-        </div>
       ) : (
         <div className="mt-8 p-6 max-w-lg text-center bg-red-100/10 border border-red-400 text-red-300 rounded-2xl shadow-lg">
-          <h2 className="text-2xl font-semibold mb-2">Symbol Not Found</h2>
+          <h2 className="text-2xl font-semibold mb-2">{dataError[0]}</h2>
           <p className="text-base">
-            We couldn't find the stock symbol {reports.symbol} you entered. Please try again with a different one.
+            {dataError[1]}
           </p>
         </div>
       )}
