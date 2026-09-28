@@ -16,24 +16,36 @@ export const resetInputElements = () => {
   }
 }
 
-// Quarterly revenue function
-export const getQuarterlyRevenue = (IS, quarter, cc) => {
-  const revenue = IS.quarterlyReports[quarter].totalRevenue;
-  return revenue !== "None" ? Number(revenue)*cc : undefined;
-}
+export const toFinancialNumber = value => {
+  if (value === null || value === undefined || value === "None" || value === "") return undefined;
+  const number = Number(value);
+  return Number.isFinite(number) ? number : undefined;
+};
+
+export const hasContiguousQuarters = (data, count) => {
+  const reports = data?.quarterlyReports || [];
+  if (reports.length < count) return false;
+  for (let i = 0; i < count - 1; i++) {
+    const newer = reports[i];
+    const older = reports[i + 1];
+    const gap = (Date.parse(newer.fiscalDateEnding) - Date.parse(older.fiscalDateEnding)) / 86400000;
+    // Include 16/17-week retail quarters while still rejecting missing quarters.
+    if (!Number.isFinite(gap) || gap < 70 || gap > 119) return false;
+    if (newer.periodStart && Date.parse(newer.periodStart) - Date.parse(older.fiscalDateEnding) !== 86400000) return false;
+  }
+  return true;
+};
+
+export const getQuarterlyRevenue = (IS, quarter, conversion) => {
+  const revenue = toFinancialNumber(IS.quarterlyReports[quarter]?.totalRevenue);
+  return revenue !== undefined ? revenue * conversion : undefined;
+};
 
 export const getAnalyzedResults = (reports, numYears) => {
-    const numberOfQuarters = reports.IS.quarterlyReports.length;
-  
-    const lastRevenue = numberOfQuarters >= 4
-      ? getAverage([
-          getQuarterlyRevenue(reports.IS, 0, reports.currencyConversion),
-          getQuarterlyRevenue(reports.IS, 1, reports.currencyConversion),
-          getQuarterlyRevenue(reports.IS, 2, reports.currencyConversion),
-          getQuarterlyRevenue(reports.IS, 3, reports.currencyConversion),
-        ]) * 4
-      : undefined;
-  
+    const revenues = Array.from({ length: 4 }, (_, q) => getQuarterlyRevenue(reports.IS, q, reports.currencyConversion));
+    const lastRevenue = hasContiguousQuarters(reports.IS, 4) && revenues.every(Number.isFinite)
+      ? revenues.reduce((sum, revenue) => sum + revenue, 0) : undefined;
+
     const shares = getShares(reports.BS);
   
     const getInputValue = (id, isPercent = false) => {
@@ -87,6 +99,7 @@ export const getAverage = (input_array) => {
 }
 
 const getDiscountedVal = (revenue, shares, growth, margin, multiple, discount, numYears) => {
+    if (![revenue, shares, growth, margin, multiple, discount, numYears].every(Number.isFinite) || shares <= 0) return "-";
     let rev = revenue
     let cumulative_val = 0
 
@@ -102,43 +115,10 @@ const getDiscountedVal = (revenue, shares, growth, margin, multiple, discount, n
     return cumulative_val.toFixed(2)
 }
 
-export const addCurrencyConversion = async (reports) => {
-    // if the symbol doesn't exist, return reports
-    if (!reports.IS.symbol) {
-        return reports
-    }
-
-    let currencyConversion = 1
-    const reportCurrency = reports.IS.quarterlyReports[0].reportedCurrency
-
-    if (reportCurrency !== "USD") {
-      try {
-        const res = await fetch(
-          `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${reportCurrency}&to_currency=USD&apikey=${process.env.ALPHA_API_KEY}`
-        );
-    
-        const response = await res.json();
-        const rate = response?.['Realtime Currency Exchange Rate']?.['5. Exchange Rate'];
-    
-        currencyConversion = Number(rate);
-        if (isNaN(currencyConversion)) {
-          console.warn("Exchange rate is NaN, defaulting to 1");
-          currencyConversion = 1
-        }
-      } catch (error) {
-        console.error("Failed to fetch exchange rate:", error);
-      }
-    }
-    reports.currencyConversion = currencyConversion
-    return reports
-}
-
-export const getShares = (BS, maxLookBackQuarters = 4) => {
-  for (let i = 0; i <maxLookBackQuarters; i++) {
-      const report = BS.quarterlyReports[i];
-      if (report && report.commonStockSharesOutstanding !== "None") {
-          return Number(report.commonStockSharesOutstanding);
-      }
-  }
-  return undefined;
+export const getShares = (BS) => {
+  // Do not silently use a stale share count from an earlier quarter.
+  const shares = toFinancialNumber(BS?.quarterlyReports?.[0]?.commonStockSharesOutstanding);
+  if (shares > 0) return shares;
+  const currentShares = toFinancialNumber(BS?.currentSharesOutstanding);
+  return currentShares > 0 ? currentShares : undefined;
 };
