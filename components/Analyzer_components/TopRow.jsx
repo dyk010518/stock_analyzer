@@ -33,7 +33,7 @@ const TopRow = ({ numYears, setNumYears }) => {
                 {["Bear", "Base", "Bull"].map((header, idx) => (
                     <th
                         key={`g2-${idx}`}
-                        className="py-2 px-2 text-base font-medium border-b border-white/15 text-white"
+                        className={`py-2 px-2 text-base font-medium border-b border-white/15 scenario-${idx}`}
                     >
                         {header}
                     </th>

@@ -20,7 +20,7 @@ const MobileInputTable = ({ inputOnlyRows, numYears, setNumYears, inputValues, h
                 </div>
               </th>
               {["Bear", "Base", "Bull"].map((label, idx) => (
-                <th key={`input-${idx}`} className="py-2 px-4 text-xs sm:text-sm font-medium border-b border-white/15 text-white">
+                <th key={`input-${idx}`} className={`py-2 px-4 text-xs sm:text-sm font-medium border-b border-white/15 scenario-${idx}`}>
                   {label}
                 </th>
               ))}

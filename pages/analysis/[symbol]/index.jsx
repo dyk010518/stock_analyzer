@@ -22,6 +22,7 @@ const StockHome = ({reports}) => {
   const [analyzed, setAnalyzed] = useState(false);
   const [earningVals, setEarningVals] = useState(false);
   const [fcfVals, setFcfVals] = useState(false);
+  const [projections, setProjections] = useState([]);
   const [numYears, setNumYears] = useState(5);
 
   const found = Boolean(reports?.IS?.symbol)
@@ -41,7 +42,12 @@ const StockHome = ({reports}) => {
   }
 
   const handleAnalyzeClick = () => {
-    const analysisResult = getAnalyzedResults(reports, numYears)
+    const yearlyResults = Array.from({ length: numYears }, (_, index) => ({
+      year: index + 1,
+      ...getAnalyzedResults(reports, index + 1),
+    }))
+    const analysisResult = yearlyResults[yearlyResults.length - 1]
+    setProjections(yearlyResults)
     setEarningVals(analysisResult['earningsVals'])
     setFcfVals(analysisResult['fcfVals'])
     setAnalyzed(true)
@@ -58,7 +64,7 @@ const StockHome = ({reports}) => {
       <Header />
       <SymbolSearch resetAnalyzer={resetAnalyzer} searched={true}/>
 
-      <div className="flex flex-col md:flex-row w-[80vw] justify-center">
+      <div className="analysis-company-row">
         {found && (
           <>
             <StockTitle reports={reports} />
@@ -90,16 +96,19 @@ const StockHome = ({reports}) => {
       <br />
 
       {analyzed && (
-        <AnalysisResult earningVals={earningVals} fcfVals={fcfVals} />
+        <AnalysisResult earningVals={earningVals} fcfVals={fcfVals} projections={projections} />
       )}
 
       {found && (
-        <p className="mb-6 max-w-3xl px-4 text-center text-xs leading-relaxed text-gray-400">
+        <details className="data-note">
+          <summary>Data sources &amp; coverage</summary>
+          <p>
           Financial statements: SEC EDGAR · USD · Missing or incomplete history is shown as “-”.
           {reports.BS.sharesSource === 'Finnhub' && ' Current shares outstanding: Finnhub.'}
           {reports.quoteStatus !== 'ok' && ' Quotes are unavailable. P/E and P/FCF require a current quote.'}
           {!getShares(reports.BS) && ' Shares outstanding are unavailable. P/E, P/FCF, and per-share valuations require a share count.'}
-        </p>
+          </p>
+        </details>
       )}
 
     </main>
