@@ -7,7 +7,7 @@ import StockAnalyzerTable from "../../../components/Analyzer_components/StockAna
 import AnalysisResult from "../../../components/Analyzer_components/AnalysisResult"
 
 import { useState } from 'react'
-import { resetInputElements, getAnalyzedResults } from "../../../utils/utils"
+import { resetInputElements, getAnalyzedResults, getShares } from "../../../utils/utils"
 import { buildMetricsData } from "../../../lib/metrics"
 import { getReportsForSymbol } from '../../../lib/getReports'
 
@@ -70,7 +70,9 @@ const StockHome = ({reports}) => {
         <>
           <p className="mt-6 max-w-3xl px-4 text-center text-sm text-gray-300">
             Financial statements: SEC EDGAR · USD · Missing or incomplete history is shown as “-”.
+            {reports.BS.sharesSource === 'Finnhub' && ' Current shares outstanding: Finnhub.'}
             {reports.quoteStatus !== 'ok' && ' Quotes are unavailable. P/E and P/FCF require a current quote.'}
+            {!getShares(reports.BS) && ' Shares outstanding are unavailable. P/E, P/FCF, and per-share valuations require a share count.'}
           </p>
           <StockAnalyzerTable
             data={data}

@@ -29,7 +29,8 @@ export const hasContiguousQuarters = (data, count) => {
     const newer = reports[i];
     const older = reports[i + 1];
     const gap = (Date.parse(newer.fiscalDateEnding) - Date.parse(older.fiscalDateEnding)) / 86400000;
-    if (!Number.isFinite(gap) || gap < 70 || gap > 110) return false;
+    // Include 16/17-week retail quarters while still rejecting missing quarters.
+    if (!Number.isFinite(gap) || gap < 70 || gap > 119) return false;
     if (newer.periodStart && Date.parse(newer.periodStart) - Date.parse(older.fiscalDateEnding) !== 86400000) return false;
   }
   return true;
@@ -117,5 +118,7 @@ const getDiscountedVal = (revenue, shares, growth, margin, multiple, discount, n
 export const getShares = (BS) => {
   // Do not silently use a stale share count from an earlier quarter.
   const shares = toFinancialNumber(BS?.quarterlyReports?.[0]?.commonStockSharesOutstanding);
-  return shares > 0 ? shares : undefined;
+  if (shares > 0) return shares;
+  const currentShares = toFinancialNumber(BS?.currentSharesOutstanding);
+  return currentShares > 0 ? currentShares : undefined;
 };
