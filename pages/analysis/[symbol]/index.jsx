@@ -12,7 +12,6 @@ import { buildMetricsData } from "../../../lib/metrics"
 import { getReportsForSymbol } from '../../../lib/getReports'
 
 const DATA_ERRORS = {
-  not_found: ['Symbol Not Found', 'This symbol was not found in the SEC company directory. Try a US-listed company.'],
   unsupported: ['Financial Statements Unavailable', 'This company does not have supported quarterly US-GAAP statements in US dollars. Funds, foreign filers, and companies using custom accounting tags may not be supported.'],
   configuration: ['Financial Data Not Configured', 'The financial data connection has not been configured. Please contact the site owner.'],
   rate_limited: ['Financial Data Temporarily Busy', 'The data provider is limiting requests. Please try again in a minute.'],
@@ -26,7 +25,9 @@ const StockHome = ({reports}) => {
   const [numYears, setNumYears] = useState(5);
 
   const found = Boolean(reports?.IS?.symbol)
-  const dataError = DATA_ERRORS[reports?.error] || DATA_ERRORS.unavailable
+  const dataError = reports?.error === 'not_found'
+    ? ['Symbol Not Found', `We couldn't find the stock symbol ${reports.symbol} you entered. Please try again with a different one.`]
+    : DATA_ERRORS[reports?.error] || DATA_ERRORS.unavailable
 
   const data = buildMetricsData(reports, found);
   const allInputIds = data.flatMap(row => row.inputIds || []);
@@ -68,12 +69,6 @@ const StockHome = ({reports}) => {
 
       {found ? (
         <>
-          <p className="mt-6 max-w-3xl px-4 text-center text-sm text-gray-300">
-            Financial statements: SEC EDGAR · USD · Missing or incomplete history is shown as “-”.
-            {reports.BS.sharesSource === 'Finnhub' && ' Current shares outstanding: Finnhub.'}
-            {reports.quoteStatus !== 'ok' && ' Quotes are unavailable. P/E and P/FCF require a current quote.'}
-            {!getShares(reports.BS) && ' Shares outstanding are unavailable. P/E, P/FCF, and per-share valuations require a share count.'}
-          </p>
           <StockAnalyzerTable
             data={data}
             fiscalDate={reports.IS.quarterlyReports[0].fiscalDateEnding}
@@ -97,7 +92,16 @@ const StockHome = ({reports}) => {
       {analyzed && (
         <AnalysisResult earningVals={earningVals} fcfVals={fcfVals} />
       )}
-      
+
+      {found && (
+        <p className="mb-6 max-w-3xl px-4 text-center text-xs leading-relaxed text-gray-400">
+          Financial statements: SEC EDGAR · USD · Missing or incomplete history is shown as “-”.
+          {reports.BS.sharesSource === 'Finnhub' && ' Current shares outstanding: Finnhub.'}
+          {reports.quoteStatus !== 'ok' && ' Quotes are unavailable. P/E and P/FCF require a current quote.'}
+          {!getShares(reports.BS) && ' Shares outstanding are unavailable. P/E, P/FCF, and per-share valuations require a share count.'}
+        </p>
+      )}
+
     </main>
   )
 }
