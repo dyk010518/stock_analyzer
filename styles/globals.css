@@ -52,3 +52,83 @@ input[type=number]::-webkit-outer-spin-button {
 .glowing-text {
   text-shadow: 0 0 5px rgba(255,255,255,0.3), 0 0 10px currentColor;
 }
+
+
+/* Selected analysis improvements; the original app styling stays intact. */
+.analysis-company-row { display: flex; align-items: center; justify-content: center; gap: 28px; width: 80vw; max-width: 1152px; margin-inline: auto; }
+.analysis-company-row > :first-child { flex: 1; min-width: 0; margin-bottom: 0; }
+.analysis-buttons { display: flex; align-items: center; gap: 9px; flex-shrink: 0; padding-left: 28px; border-left: 1px solid rgb(255 255 255 / 20%); }
+.analysis-primary-button, .analysis-reset-button { padding: 12px 24px; min-height: 48px; border-radius: 7px; font-size: 16px; font-weight: 500; transition: background .2s, border-color .2s, color .2s; }
+.analysis-primary-button { border: 1px solid #fcd34d; background: #fcd34d; color: #111827; }
+.analysis-primary-button:hover { background: #f59e0b; border-color: #f59e0b; }
+.analysis-reset-button { border: 1px solid rgb(255 255 255 / 20%); background: #1f2937; color: #d1d5db; }
+.analysis-reset-button:hover { background: #374151; border-color: rgb(255 255 255 / 35%); color: #fff; }
+.analysis-buttons button:focus-visible, .scenario-chart button:focus-visible, .scenario-plot:focus-visible, .data-note summary:focus-visible { outline: 2px solid #fcd34d; outline-offset: 4px; }
+.scenario-0 { color: #e2b2ac; }
+.scenario-1 { color: #b6efd0; }
+.scenario-2 { color: #bcb6e9; }
+.results-section { width: min(660px, 80vw); max-width: 660px; color: #f3f4f6; margin: 32px auto 0; }
+.results-section h2 { font-size: 22px; font-weight: 500; letter-spacing: -.3px; text-align: center; margin-bottom: 20px; color: #fcd34d; }
+.results-table-container { border: 1px solid rgb(255 255 255 / 20%); background: rgb(255 255 255 / 5%); border-radius: 11px; overflow: hidden; backdrop-filter: blur(12px); box-shadow: 0 4px 30px rgb(255 255 255 / 10%); }
+.results-table { border-collapse: collapse; width: 100%; table-layout: fixed; font-variant-numeric: tabular-nums; }
+.results-table th, .results-table td { padding: 17px 18px; text-align: center; font-size: 16px; font-weight: 400; }
+.results-table thead { background: rgb(255 255 255 / 10%); }
+.results-table thead th { font-size: 15px; }
+.results-table th:first-child { text-align: left; width: 28%; color: #d1d5db; }
+.results-table tbody tr + tr { border-top: 1px solid rgb(255 255 255 / 10%); }
+.results-table td { color: #f3f4f6; }
+.scenario-chart { margin-top: 18px; padding: 20px 20px 14px; border: 1px solid rgb(255 255 255 / 20%); border-radius: 12px; background: rgb(255 255 255 / 5%); backdrop-filter: blur(12px); box-shadow: 0 4px 30px rgb(255 255 255 / 10%); }
+.scenario-chart-header { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+.scenario-chart-header h3 { margin: 0; font-size: 17px; font-weight: 500; letter-spacing: -.2px; color: #fcd34d; }
+.chart-model-switch { display: flex; padding: 3px; border: 1px solid rgb(255 255 255 / 20%); border-radius: 6px; background: #1f2937; }
+.chart-model-switch button { padding: 8px 12px; border: 0; border-radius: 3px; background: transparent; color: #9ca3af; font-size: 13px; }
+.chart-model-switch button:hover { color: #fff; }
+.chart-model-switch button[aria-pressed=true] { background: #374151; color: #fcd34d; }
+.scenario-plot { margin: 18px -7px 13px; border-radius: 5px; cursor: crosshair; touch-action: pan-y; }
+.scenario-plot svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart-grid-line { stroke: #fff; stroke-opacity: .12; stroke-dasharray: 3 5; stroke-width: .8; }
+.chart-zero-line { stroke: #6b7280; stroke-width: 1; }
+.chart-axis-label { fill: #9ca3af; font-size: 14px; font-variant-numeric: tabular-nums; }
+.chart-axis-label.active { fill: #fcd34d; }
+.chart-cursor { stroke: #d1d5db; stroke-opacity: .3; stroke-dasharray: 3 5; }
+.scenario-path { stroke-linecap: round; stroke-linejoin: round; }
+.chart-readout { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.chart-readout > div { display: flex; align-items: center; justify-content: space-between; gap: 7px; padding: 11px 12px; border: 1px solid rgb(255 255 255 / 15%); border-radius: 6px; background: #1f2937; }
+.chart-readout span { display: flex; align-items: center; gap: 7px; font-size: 14px; color: #d1d5db; }
+.chart-readout i { width: 5px; height: 5px; border-radius: 50%; background: var(--case-color); }
+.chart-readout output { color: var(--case-color); font-size: 16px; font-variant-numeric: tabular-nums; }
+.chart-caption { margin-top: 13px; text-align: center; font-size: 12px; line-height: 1.6; color: #9ca3af; }
+.chart-unavailable { padding: 38px 10px; text-align: center; font-size: 14px; color: #9ca3af; }
+.data-note { width: 80vw; max-width: 1152px; font-size: 14px; color: #9ca3af; margin: 26px 0 40px; }
+.data-note summary { cursor: pointer; width: fit-content; }
+.data-note p { max-width: 760px; font-size: 14px; line-height: 1.9; margin: 10px 0 0; color: #9ca3af; }
+
+.results-section.enter { animation: result-enter .4s ease-out both; }
+@keyframes result-enter { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 900px) {
+  .analysis-company-row { flex-direction: column; align-items: stretch; gap: 20px; margin-bottom: 26px; }
+  .analysis-buttons { border: 0; padding: 0; justify-content: center; }
+}
+@media (max-width: 700px) {
+  .results-section { width: calc(100vw - 40px); margin-top: 29px; }
+  .results-section h2 { font-size: 20px; }
+  .results-table th, .results-table td { padding: 15px 6px; font-size: 14px; }
+  .results-table thead th { font-size: 13px; }
+  .results-table th:first-child { width: 29%; }
+  .scenario-chart { padding: 16px 12px 12px; }
+  .scenario-chart-header { gap: 12px; flex-wrap: wrap; }
+  .scenario-chart-header h3 { font-size: 16px; }
+  .chart-model-switch button { padding: 8px 10px; font-size: 12px; }
+  .scenario-plot { margin: 18px -4px 14px; }
+  .chart-axis-label { font-size: 22px; }
+  .chart-readout { gap: 6px; }
+  .chart-readout > div { flex-direction: column; align-items: flex-start; padding: 9px 10px; gap: 7px; }
+  .chart-readout span { font-size: 13px; }
+  .chart-readout output { font-size: 14px; }
+  .chart-caption { font-size: 12px; }
+  .data-note { font-size: 13px; margin-top: 25px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .results-section.enter { animation: none; }
+  .analysis-buttons button, .scenario-chart button { transition: none; }
+}
